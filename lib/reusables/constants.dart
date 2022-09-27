@@ -50,3 +50,20 @@ const pageDecoration = PageDecoration(
   pageColor: Colors.white,
   imagePadding: EdgeInsets.zero,
 );
+
+const kGreenColor = Color(0xff22a45d);
+const kBlackColor = Color(0xff010f07);
+const kGreyColor = Color(0xff868686);
+const kWhiteColor = Color(0xffffffff);
+const kBlueColor = Color(0xff4285f4);
+const kDeepBlueColor = Color(0xff395998);
+const kCopperColor = Color(0xffef9920);
+const kBoldTextStyle = TextStyle(
+  color: kBlackColor,
+  fontWeight: FontWeight.w900,
+  fontSize: 30,
+);
+final kDescTextStyle = TextStyle(
+  color: kBlackColor.withOpacity(0.5),
+  fontSize: 20,
+);
