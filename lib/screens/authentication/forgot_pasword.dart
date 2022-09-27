@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/custom_text_field.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/screens/authentication/reset_email_success.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -61,8 +63,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   suffixIcon: Icons.email,
                 ),
                 addVerticalSpacing(14),
-                ReusableButton(
-                    const Text('RESET PASSWORD'), () {}, kGreenColor),
+                ReusableButton(const Text('RESET PASSWORD'), () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const ResetSuccess(),
+                          type: PageTransitionType.rightToLeft));
+                }, kGreenColor),
               ],
             ),
           ],
