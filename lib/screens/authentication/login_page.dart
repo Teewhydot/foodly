@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/custom_text_field.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/screens/authentication/forgot_pasword.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -80,7 +82,13 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                child: const ForgotPasswordPage(),
+                                type: PageTransitionType.rightToLeft));
+                      },
                       child: Text(
                         'Forgot Password?',
                         style: kDescTextStyle.copyWith(
@@ -90,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                ReusableButton(const Text('SIGN IN'), () {},kGreenColor),
+                ReusableButton(const Text('SIGN IN'), () {}, kGreenColor),
                 addVerticalSpacing(20),
                 Text(
                   'Or',
@@ -106,8 +114,10 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.white,
                           ),
                           addHorizontalSpacing(30),
-                          const Center(child: Text('CONNECT WITH FACEBOOK'))]),
-                        () {},kDeepBlueColor),
+                          const Center(child: Text('CONNECT WITH FACEBOOK'))
+                        ]),
+                        () {},
+                        kDeepBlueColor),
                     addVerticalSpacing(20),
                     ReusableButton(
                         Row(children: [
@@ -116,8 +126,10 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.white,
                           ),
                           addHorizontalSpacing(30),
-                          const Center(child: Text('CONNECT WITH GOOGLE'))]),
-                            () {},kBlueColor),
+                          const Center(child: Text('CONNECT WITH GOOGLE'))
+                        ]),
+                        () {},
+                        kBlueColor),
                   ],
                 )
               ],
