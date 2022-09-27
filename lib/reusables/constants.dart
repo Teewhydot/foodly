@@ -67,3 +67,9 @@ final kDescTextStyle = TextStyle(
   color: kBlackColor.withOpacity(0.5),
   fontSize: 20,
 );
+const kTitleTextStyle = TextStyle(
+  color: kBlackColor,
+  fontWeight: FontWeight.w900,
+  fontSize: 20,
+);
+const textFieldFillColor = Color(0xffF3F2F2);

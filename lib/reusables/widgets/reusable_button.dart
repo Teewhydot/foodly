@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:foodly/reusables/constants.dart';
 
 
 class ReusableButton extends StatelessWidget {
-  final Text buttonText;
+  final Widget buttonText;
   final onpressed;
+  final buttonColor;
 
-  const ReusableButton(this.buttonText, this.onpressed, {super.key});
+  const ReusableButton(this.buttonText, this.onpressed,this.buttonColor, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,11 @@ class ReusableButton extends StatelessWidget {
               child: ElevatedButton(
                 style: ButtonStyle(
                   //  foregroundColor: MaterialStateProperty.all(Colors.blue.shade800),
-                    backgroundColor:  MaterialStateProperty.all( kGreenColor),
+                    backgroundColor:  MaterialStateProperty.all(buttonColor),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
-                            side: const BorderSide(color: Colors.blue)
+                            side: const BorderSide(color: Colors.transparent)
                         )
                     )
                 ),
