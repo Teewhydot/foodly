@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
                 focusColor: Colors.white,
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
-                      color: kGreyColor, width: 5, style: BorderStyle.solid),
+                      color: kGreenColor, width: 3, style: BorderStyle.solid),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 suffixIcon: Padding(
@@ -43,8 +43,10 @@ class CustomTextField extends StatelessWidget {
                       onTap: () async {}, child: Icon(suffixIcon)),
                 ),
                 border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                      width: 1, style: BorderStyle.solid, color: kGreyColor),
+                  borderSide: BorderSide(
+                      width: 1,
+                      style: BorderStyle.solid,
+                      color: kGreenColor.withOpacity(0.5)),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 hintText: hintText,

@@ -28,6 +28,8 @@ class _OnboardingState extends State<Onboarding> {
           SizedBox(
             height: onboardingPageHeight,
             child: PageView(
+              pageSnapping: true,
+              key: UniqueKey(),
               controller: pageController,
               children: const [
                 PageModel(
@@ -39,12 +41,12 @@ class _OnboardingState extends State<Onboarding> {
                     imageAsset: Assets.imagesA1,
                     heading: "Free delivery offers",
                     description:
-                        "Free delivery for new customers via Apple Pay and others payment methods."),
+                    "Free delivery for new customers via Apple Pay and others payment methods."),
                 PageModel(
                     imageAsset: Assets.imagesA2,
                     heading: "Choose your food",
                     description:
-                        "Easily find your type of food craving and you’ll get delivery in wide range."),
+                    "Easily find your type of food craving and you’ll get delivery in wide range."),
               ],
             ),
           ),
@@ -61,7 +63,7 @@ class _OnboardingState extends State<Onboarding> {
                 Navigator.push(
                     context,
                     PageTransition(
-                        child: const LoginPage(),
+                        child: LoginPage(),
                         type: PageTransitionType.rightToLeft));
               },kGreenColor)),
         ],

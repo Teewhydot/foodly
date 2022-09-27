@@ -6,18 +6,17 @@ import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/custom_text_field.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
 import 'package:foodly/screens/authentication/forgot_pasword.dart';
-import 'package:foodly/screens/authentication/signup_page.dart';
+import 'package:foodly/screens/authentication/login_page.dart';
 import 'package:page_transition/page_transition.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
-
-  final TextEditingController _emailController = TextEditingController();
-
-  final TextEditingController _passwordController = TextEditingController();
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    final TextEditingController fullNameController = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: kWhiteColor,
@@ -26,7 +25,7 @@ class LoginPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: kWhiteColor,
         title: const Text(
-          'Sign In',
+          'Sign Up',
           style: kTitleTextStyle,
         ),
         leading: IconButton(
@@ -46,28 +45,36 @@ class LoginPage extends StatelessWidget {
           children: [
             addVerticalSpacing(24),
             const Text(
-              'Welcome Back',
+              'Create account',
               style: kTitleTextStyle,
             ),
             addVerticalSpacing(20),
             RichText(
                 text: TextSpan(
-              text: 'Enter your Phone number or Email for sign in, Or ',
+              text: 'Enter your Name, Email and Password to sign up.',
               style: kDescTextStyle,
               children: [
                 TextSpan(
-                  text: ' Create account',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              child: const SignUpPage(),
-                              type: PageTransitionType.rightToLeft));
-                    },
-                  style: kTitleTextStyle.copyWith(
-                    color: kGreenColor,
-                  ),
+                  text: ' Already have an account?',
+                  style: kDescTextStyle,
+                  children: [
+                    TextSpan(
+                      text: ' Sign In',
+                      style: kDescTextStyle.copyWith(
+                        color: kGreenColor,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: LoginPage(),
+                            ),
+                          );
+                        },
+                    ),
+                  ],
                 ),
               ],
             )),
@@ -75,13 +82,19 @@ class LoginPage extends StatelessWidget {
             Column(
               children: [
                 CustomTextField(
-                  controller: _emailController,
+                  controller: fullNameController,
+                  hintText: 'Full name',
+                  suffixIcon: Icons.person,
+                ),
+                addVerticalSpacing(14),
+                CustomTextField(
+                  controller: emailController,
                   hintText: 'Email',
                   suffixIcon: Icons.email,
                 ),
                 addVerticalSpacing(14),
                 CustomTextField(
-                  controller: _passwordController,
+                  controller: passwordController,
                   hintText: 'Password',
                   suffixIcon: Icons.lock,
                 ),
@@ -106,7 +119,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                ReusableButton(const Text('SIGN IN'), () {}, kGreenColor),
+                ReusableButton(const Text('SIGN UP'), () {}, kGreenColor),
                 addVerticalSpacing(20),
                 Text(
                   'Or',
