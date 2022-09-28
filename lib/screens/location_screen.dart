@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
-import 'package:foodly/screens/home.dart';
+import 'package:foodly/screens/mainscreen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Location extends StatelessWidget {

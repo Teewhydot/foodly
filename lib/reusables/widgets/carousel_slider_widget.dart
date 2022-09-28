@@ -8,12 +8,12 @@ class CarouselSliderWidget extends StatelessWidget {
   final image2;
   final image3;
 
-  const CarouselSliderWidget(this.image, this.image2, this.image3);
+  const CarouselSliderWidget(this.image, this.image2, this.image3, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(8.0.r),
       child: SizedBox(
         height: 185.h,
         width: 335.w,
