@@ -7,6 +7,7 @@ import 'package:foodly/reusables/widgets/custom_text_field.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
 import 'package:foodly/screens/authentication/forgot_pasword.dart';
 import 'package:foodly/screens/authentication/signup_page.dart';
+import 'package:foodly/screens/location_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatelessWidget {
@@ -106,7 +107,13 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                ReusableButton(const Text('SIGN IN'), () {}, kGreenColor),
+                ReusableButton(const Text('SIGN IN'), () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: Location(),
+                          type: PageTransitionType.rightToLeft));
+                }, kGreenColor),
                 addVerticalSpacing(20),
                 Text(
                   'Or',

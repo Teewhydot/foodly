@@ -4,7 +4,7 @@ import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
 import 'package:foodly/screens/authentication/login_page.dart';
-import 'package:foodly/screens/onboarding/onboarding_flow/pages_model.dart';
+import 'package:foodly/screens/onboarding/pages_model.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

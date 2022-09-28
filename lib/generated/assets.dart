@@ -5,6 +5,13 @@ class Assets {
   static const String imagesA1 = 'assets/images/a1.png';
   static const String imagesA2 = 'assets/images/a2.png';
   static const String imagesA3 = 'assets/images/a3.png';
+  static const String imagesHA = 'assets/images/hA.png';
+  static const String imagesHI = 'assets/images/hI.png';
   static const String imagesLogobgremoved = 'assets/images/logobgremoved.png';
-
+  static const String imagesOA = 'assets/images/oA.png';
+  static const String imagesOI = 'assets/images/oI.png';
+  static const String imagesPA = 'assets/images/pA.png';
+  static const String imagesPI = 'assets/images/pI.png';
+  static const String imagesSA = 'assets/images/sA.png';
+  static const String imagesSI = 'assets/images/sI.png';
 }

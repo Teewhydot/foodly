@@ -13,6 +13,7 @@ dependencies:
   url_launcher: ^6.1.5
   toast: ^0.3.0
   page_transition: "^2.0.9"
+  carousel_pro: ^1.0.0
   font_awesome_flutter: ^10.2.1
   introduction_screen: ^3.0.2
   shared_preferences: ^2.0.15

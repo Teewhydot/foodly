@@ -73,3 +73,11 @@ const kTitleTextStyle = TextStyle(
   fontSize: 20,
 );
 const textFieldFillColor = Color(0xffF3F2F2);
+const kBlackText = TextStyle(
+  color: kBlackColor,
+  fontSize: 20,
+);
+const kGreenText = TextStyle(
+  color: kGreenColor,
+  fontSize: 20,
+);
