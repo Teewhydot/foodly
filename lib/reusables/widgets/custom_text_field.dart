@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/reusables/constants.dart';
@@ -13,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.suffixIcon,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -4,8 +4,8 @@ import 'package:foodly/reusables/constants.dart';
 
 class PageModel extends StatelessWidget {
   final String imageAsset;
-  final heading;
-  final description;
+  final String heading;
+  final String description;
 
   const PageModel(
       {super.key,
@@ -18,7 +18,6 @@ class PageModel extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        addVerticalSpacing(58),
         SizedBox(height: 383.h, width: 376.w, child: Image.asset(imageAsset)),
         addVerticalSpacing(70),
         Text(heading,style: kBoldTextStyle),

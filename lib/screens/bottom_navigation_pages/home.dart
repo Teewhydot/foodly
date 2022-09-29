@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/models/featured_partners.dart';
+import 'package:foodly/models/restaurants.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/carousel_slider_widget.dart';
+import 'package:foodly/screens/all_restaurants.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -54,7 +57,98 @@ class HomePage extends StatelessWidget {
         time: "30-40 min",
       ),
     ];
+    List<Restaurants> restaurants = [
+      Restaurants(
+        image: Assets.imagesFp,
+        name: "The Coffee Bean & Tea Leaf",
+        location: "Kampala, Uganda",
+        rating: 4.5,
+        numberOfRatings: 100,
+        id: 1,
+        time: "30-40 min",
+        deliveryFee: "UGX 2000",
+        foodType: ["Coffee", "Tea", "Bakery"],
+      ),
+      Restaurants(
+        image: Assets.imagesFp,
+        name: "The Coffee Bean & Tea Leaf",
+        location: "Kampala, Uganda",
+        rating: 4.5,
+        numberOfRatings: 100,
+        id: 1,
+        time: "30-40 min",
+        deliveryFee: "UGX 2000",
+        foodType: ["Coffee", "Tea", "Bakery"],
+      ),
+      Restaurants(
+        image: Assets.imagesFp,
+        name: "The Coffee Bean & Tea Leaf",
+        location: "Kampala, Uganda",
+        rating: 4.5,
+        numberOfRatings: 100,
+        id: 1,
+        time: "30-40 min",
+        deliveryFee: "UGX 2000",
+        foodType: ["Coffee", "Tea", "Bakery"],
+      ),
+      Restaurants(
+        image: Assets.imagesFp,
+        name: "The Coffee Bean & Tea Leaf",
+        location: "Kampala, Uganda",
+        rating: 4.5,
+        numberOfRatings: 100,
+        id: 1,
+        time: "30-40 min",
+        deliveryFee: "UGX 2000",
+        foodType: ["Coffee", "Tea", "Bakery"],
+      ),
+      Restaurants(
+        image: Assets.imagesFp,
+        name: "The Coffee Bean & Tea Leaf",
+        location: "Kampala, Uganda",
+        rating: 4.5,
+        numberOfRatings: 100,
+        id: 1,
+        time: "30-40 min",
+        deliveryFee: "UGX 2000",
+        foodType: ["Coffee", "Tea", "Bakery"],
+      ),
+      Restaurants(
+        image: Assets.imagesFp,
+        name: "The Coffee Bean & Tea Leaf",
+        location: "Kampala, Uganda",
+        rating: 4.5,
+        numberOfRatings: 100,
+        id: 1,
+        time: "30-40 min",
+        deliveryFee: "UGX 2000",
+        foodType: ["Coffee", "Tea", "Bakery"],
+      ),
+      Restaurants(
+        image: Assets.imagesFp,
+        name: "The Coffee Bean & Tea Leaf",
+        location: "Kampala, Uganda",
+        rating: 4.5,
+        numberOfRatings: 100,
+        id: 1,
+        time: "30-40 min",
+        deliveryFee: "UGX 2000",
+        foodType: ["Coffee", "Tea", "Bakery"],
+      ),
+      Restaurants(
+        image: Assets.imagesFp,
+        name: "The Coffee Bean & Tea Leaf",
+        location: "Kampala, Uganda",
+        rating: 4.5,
+        numberOfRatings: 100,
+        id: 1,
+        time: "30-40 min",
+        deliveryFee: "UGX 2000",
+        foodType: ["Coffee", "Tea", "Bakery"],
+      ),
+    ];
     return Scaffold(
+      backgroundColor: kWhiteColor,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
@@ -81,8 +175,8 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(left: 10.w, right: 10.w),
         child: ListView(
+          key: const PageStorageKey('home'),
           children: [
-            const Divider(),
             addVerticalSpacing(24),
             const CarouselSliderWidget(
                 Assets.imagesA1, Assets.imagesA2, Assets.imagesA3),
@@ -97,9 +191,18 @@ class HomePage extends StatelessWidget {
                     fontSize: 25.sp,
                   ),
                 ),
-                const Text(
-                  'See all',
-                  style: kGreenText,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const AllRestaurants(),
+                            type: PageTransitionType.bottomToTop));
+                  },
+                  child: const Text(
+                    'See all',
+                    style: kGreenText,
+                  ),
                 ),
               ],
             ),
@@ -107,9 +210,12 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 320.h,
               child: ListView.builder(
+                key: const PageStorageKey('featured-partners'),
                 itemCount: featuredPartners.length,
                 itemBuilder: (context, index) {
                   return FeaturedPartnerWidget(
+                    width: 250.0.w,
+                    height: 200.0.h,
                     image: featuredPartners[index].image,
                     name: featuredPartners[index].name,
                     location: featuredPartners[index].location,
@@ -140,9 +246,18 @@ class HomePage extends StatelessWidget {
                     fontSize: 25.sp,
                   ),
                 ),
-                const Text(
-                  'See all',
-                  style: kGreenText,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const AllRestaurants(),
+                            type: PageTransitionType.bottomToTop));
+                  },
+                  child: const Text(
+                    'See all',
+                    style: kGreenText,
+                  ),
                 ),
               ],
             ),
@@ -157,9 +272,12 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 320.h,
               child: ListView.builder(
+                key: const PageStorageKey('best-picks'),
                 itemCount: featuredPartners.length,
                 itemBuilder: (context, index) {
                   return FeaturedPartnerWidget(
+                    width: 240.0,
+                    height: 160.0,
                     image: featuredPartners[index].image,
                     name: featuredPartners[index].name,
                     location: featuredPartners[index].location,
@@ -173,7 +291,7 @@ class HomePage extends StatelessWidget {
                 // children: featuredPartners,
               ),
             ),
-            addVerticalSpacing(24),
+            addVerticalSpacing(14),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -184,11 +302,43 @@ class HomePage extends StatelessWidget {
                     fontSize: 25.sp,
                   ),
                 ),
-                const Text(
-                  'See all',
-                  style: kGreenText,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const AllRestaurants(),
+                            type: PageTransitionType.bottomToTop));
+                  },
+                  child: const Text(
+                    'See all',
+                    style: kGreenText,
+                  ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 350.h,
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return RestaurantsWidget(
+                    width: 290,
+                    height: 185,
+                    image: restaurants[index].image,
+                    name: restaurants[index].name,
+                    location: restaurants[index].location,
+                    rating: restaurants[index].rating,
+                    numberOfRatings: restaurants[index].numberOfRatings,
+                    time: restaurants[index].time,
+                    deliveryFee: restaurants[index].deliveryFee,
+                    foodType: restaurants[index].foodType,
+                    id: 1,
+                  );
+                },
+                itemCount: restaurants.length,
+                scrollDirection: Axis.horizontal,
+                physics: const ClampingScrollPhysics(),
+              ),
             ),
           ],
         ),

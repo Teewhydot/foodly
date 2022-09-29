@@ -5,6 +5,10 @@ class Assets {
   static const String imagesA1 = 'assets/images/a1.png';
   static const String imagesA2 = 'assets/images/a2.png';
   static const String imagesA3 = 'assets/images/a3.png';
+  static const String imagesFeaturedpartners =
+      'assets/images/featuredpartners.png';
+  static const String imagesFeaturedpartners1 =
+      'assets/images/featuredpartners1.png';
   static const String imagesFp = 'assets/images/fp.png';
   static const String imagesHA = 'assets/images/hA.png';
   static const String imagesHI = 'assets/images/hI.png';
@@ -16,4 +20,6 @@ class Assets {
   static const String imagesPromo = 'assets/images/promo.png';
   static const String imagesSA = 'assets/images/sA.png';
   static const String imagesSI = 'assets/images/sI.png';
+  static const String imagesTime = 'assets/images/time.png';
+  static const String imagesTimer = 'assets/images/timer.png';
 }

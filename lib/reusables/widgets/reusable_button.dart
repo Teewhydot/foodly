@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:foodly/reusables/constants.dart';
 
@@ -6,7 +8,8 @@ class ReusableButton extends StatelessWidget {
   final onpressed;
   final buttonColor;
 
-  const ReusableButton(this.buttonText, this.onpressed,this.buttonColor, {super.key});
+  const ReusableButton(this.buttonText, this.onpressed, this.buttonColor,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class ReusableButton extends StatelessWidget {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             side:
-                                const BorderSide(color: Colors.transparent)))),
+                            const BorderSide(color: Colors.transparent)))),
                 onPressed: onpressed,
                 child: buttonText,
               ),

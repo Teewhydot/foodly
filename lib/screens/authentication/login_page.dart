@@ -111,7 +111,7 @@ class LoginPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: Location(),
+                          child: const Location(),
                           type: PageTransitionType.rightToLeft));
                 }, kGreenColor),
                 addVerticalSpacing(20),
