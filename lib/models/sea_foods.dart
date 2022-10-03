@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodly/models/add_to_order.dart';
 import 'package:foodly/reusables/constants.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SeaFoods {
   SeaFoods({
@@ -36,7 +38,13 @@ class SeafoodWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            PageTransition(
+                child: const AddToOrderPage(),
+                type: PageTransitionType.rightToLeft));
+      },
       child: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
         child: Row(
