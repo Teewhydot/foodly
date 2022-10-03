@@ -35,59 +35,62 @@ class SeafoodWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
-      child: Row(
-        children: [
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: AssetImage(image),
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+        child: Row(
+          children: [
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: AssetImage(image),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          addHorizontalSpacing(30),
-          SizedBox(
-            height: 120,
-            width: 200,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: kBlackText,
-                ),
-                Row(
-                  children: [
-                    for (var i = 0; i < ingredients.length; i++)
-                      Text(
-                        ingredients[i],
-                        style: kDescTextStyle,
+            addHorizontalSpacing(30),
+            SizedBox(
+              height: 120,
+              width: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: kBlackText,
+                  ),
+                  Row(
+                    children: [
+                      for (var i = 0; i < ingredients.length; i++)
+                        Text(
+                          ingredients[i],
+                          style: kDescTextStyle,
+                        ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(foodType, style: kDescTextStyle),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          price,
+                          style: kGreenText,
+                        ),
                       ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(foodType, style: kDescTextStyle),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Text(
-                        price,
-                        style: kGreenText,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

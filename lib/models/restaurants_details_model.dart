@@ -171,172 +171,127 @@ class RestaurantDetails extends StatelessWidget {
         builder: (context, constraints) => ListView(
           scrollDirection: Axis.vertical,
           children: [
-            SizedBox(
-              width: constraints.maxWidth,
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                children: [
-                  const CustomCarouselWidget(
-                    Assets.imagesArmImage,
-                    Assets.imagesArmImage,
-                    Assets.imagesArmImage,
-                  ),
-                  Align(
-                    alignment: const Alignment(-0.9, -0.8),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back_ios),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 480,
-                    left: 0,
-                    child: Row(
-                      children: [
-                        addHorizontalSpacing(20),
-                        const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'MacDonalds',
-                              style: kBoldTextStyle,
-                            )),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 450,
-                    child: Row(
-                      children: [
-                        addHorizontalSpacing(20),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Text('vegan, fast food, chicken',
-                                style: kDescTextStyle)),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 420,
-                    child: Row(
-                      children: [
-                        addHorizontalSpacing(20),
-                        const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text('4.5', style: kTitleTextStyle)),
-                        addHorizontalSpacing(5),
-                        const Align(
-                            alignment: Alignment.topLeft,
-                            child: Icon(
-                              Icons.star,
-                              color: kGreenColor,
-                              size: 20,
-                            )),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Text('200+ ratings', style: kDescTextStyle)),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 360,
-                    right: 50,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                FontAwesomeIcons.alignRight,
-                                color: kGreenColor,
-                                size: 20,
-                              ),
-                              addHorizontalSpacing(5),
-                              const Text('Free Delivery'),
-                              addHorizontalSpacing(5),
-                              const Icon(
-                                FontAwesomeIcons.alignRight,
-                                color: kGreenColor,
-                                size: 20,
-                              ),
-                              addHorizontalSpacing(5),
-                              const Text('25 min '),
-                            ],
-                          ),
-                          SizedBox(
-                              width: 140,
-                              child: LocationButton(
-                                  Text(
-                                    'TAKE AWAY',
-                                    style: kGreenText.copyWith(fontSize: 14),
-                                  ),
-                                  () {},
-                                  kWhiteColor)),
-                        ]),
-                  ),
-                  Positioned(
-                    bottom: 320,
-                    left: 20,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Featured partners',
-                          style: kTitleTextStyle.copyWith(
-                            fontSize: 23.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      height: 320.h,
-                      child: ListView.builder(
-                        key: const PageStorageKey('best-picks'),
-                        itemCount: featuredPartners.length,
-                        itemBuilder: (context, index) {
-                          return FeaturedPartnerWidget(
-                            width: 240.0,
-                            height: 160.0,
-                            image: featuredPartners[index].image,
-                            name: featuredPartners[index].name,
-                            location: featuredPartners[index].location,
-                            rating: featuredPartners[index].rating,
-                            time: featuredPartners[index].time,
-                            deliveryFee: 'Free Delivery',
-                          );
-                        },
-                        scrollDirection: Axis.horizontal,
-                        physics: const ClampingScrollPhysics(),
-                        // children: featuredPartners,
+            RestaurantDetail(featuredPartners: featuredPartners),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    addHorizontalSpacing(10),
+                    Text(
+                      'MacDonalds',
+                      style: kBoldTextStyle.copyWith(
+                        color: Colors.black,
                       ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 10,
-                    left: 20,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Most popular',
-                          style: kTitleTextStyle.copyWith(
-                            fontSize: 23.sp,
-                          ),
-                        ),
-                      ],
+                  ],
+                ),
+                addVerticalSpacing(10),
+                Row(
+                  children: [
+                    addHorizontalSpacing(10),
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Text('vegan, fast food, chicken',
+                            style: kDescTextStyle)),
+                  ],
+                ),
+                addVerticalSpacing(10),
+                Row(
+                  children: [
+                    addHorizontalSpacing(10),
+                    Text('4.5', style: kTitleTextStyle),
+                    addHorizontalSpacing(5),
+                    Icon(
+                      Icons.star,
+                      color: kGreenColor,
+                      size: 20,
                     ),
+                    Text('200+ ratings', style: kDescTextStyle),
+                  ],
+                ),
+                addVerticalSpacing(10),
+                Row(children: [
+                  addHorizontalSpacing(10),
+                  Row(
+                    children: [
+                      const Icon(
+                        FontAwesomeIcons.alignRight,
+                        color: kGreenColor,
+                        size: 20,
+                      ),
+                      addHorizontalSpacing(5),
+                      const Text('Free Delivery'),
+                      addHorizontalSpacing(5),
+                      const Icon(
+                        FontAwesomeIcons.alignRight,
+                        color: kGreenColor,
+                        size: 20,
+                      ),
+                      addHorizontalSpacing(5),
+                      const Text('25 min '),
+                    ],
                   ),
-                ],
-              ),
+                  SizedBox(
+                      width: 140,
+                      child: LocationButton(
+                          Text(
+                            'TAKE AWAY',
+                            style: kGreenText.copyWith(fontSize: 14),
+                          ),
+                          () {},
+                          kWhiteColor)),
+                ]),
+                addVerticalSpacing(10),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Featured partners',
+                  style: kTitleTextStyle.copyWith(
+                    fontSize: 23.sp,
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 320.h,
               child: ListView.builder(
                 key: const PageStorageKey('best-picks'),
+                itemCount: featuredPartners.length,
+                itemBuilder: (context, index) {
+                  return FeaturedPartnerWidget(
+                    width: 240.0,
+                    height: 160.0,
+                    image: featuredPartners[index].image,
+                    name: featuredPartners[index].name,
+                    location: featuredPartners[index].location,
+                    rating: featuredPartners[index].rating,
+                    time: featuredPartners[index].time,
+                    deliveryFee: 'Free Delivery',
+                  );
+                },
+                scrollDirection: Axis.horizontal,
+                physics: const ClampingScrollPhysics(),
+                // children: featuredPartners,
+              ),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Most popular',
+                  style: kTitleTextStyle.copyWith(
+                    fontSize: 23.sp,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 320.h,
+              child: ListView.builder(
+                key: const PageStorageKey('featured_partners'),
                 itemCount: featuredPartners.length,
                 itemBuilder: (context, index) {
                   return FeaturedPartnerWidget(
@@ -383,6 +338,48 @@ class RestaurantDetails extends StatelessWidget {
                 })
           ],
         ),
+      ),
+    );
+  }
+}
+
+class RestaurantDetail extends StatefulWidget {
+  const RestaurantDetail({
+    Key? key,
+    required this.featuredPartners,
+  }) : super(key: key);
+
+  final List<FeaturedPartner> featuredPartners;
+
+  @override
+  State<RestaurantDetail> createState() => _RestaurantDetailState();
+}
+
+class _RestaurantDetailState extends State<RestaurantDetail> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 280.h,
+      child: Stack(
+        children: [
+          const CustomCarouselWidget(
+            Assets.imagesArmImage,
+            Assets.imagesArmImage,
+            Assets.imagesArmImage,
+          ),
+          Align(
+            alignment: const Alignment(-0.99, -0.99),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -51,21 +51,21 @@ class _OnboardingState extends State<Onboarding> {
             ),
           ),
           Align(
-              alignment: Alignment(0.w, 0.59.h),
+              alignment: Alignment(0.w, 0.65.h),
               child: SmoothPageIndicator(
                 controller: pageController,
                 count: 3,
                 effect: const WormEffect(),
               )),
           Align(
-              alignment:  Alignment(0.w, 0.75.h),
+              alignment: Alignment(0.w, 0.85.h),
               child: ReusableButton(const Text('GET STARTED'), () {
                 Navigator.push(
                     context,
                     PageTransition(
                         child: LoginPage(),
                         type: PageTransitionType.rightToLeft));
-              },kGreenColor)),
+              }, kGreenColor)),
         ],
       ),
     );
