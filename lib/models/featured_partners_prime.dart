@@ -113,7 +113,7 @@ class FeaturesPartnersPrimeWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               addVerticalSpacing(10),
             ],
           ),

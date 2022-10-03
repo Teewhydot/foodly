@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodly/models/restaurants_details_model.dart';
 import 'package:foodly/reusables/constants.dart';
+import 'package:page_transition/page_transition.dart';
 
 class FeaturedPartner {
   final String image;
@@ -46,15 +48,24 @@ class FeaturedPartnerWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      image,
-                    ),
-                    fit: BoxFit.fill)),
-            height: height.h,
-            width: width.w,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const RestaurantDetails(),
+                      type: PageTransitionType.rightToLeft));
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        image,
+                      ),
+                      fit: BoxFit.fill)),
+              height: height.h,
+              width: width.w,
+            ),
           ),
           addVerticalSpacing(14),
           Text(name, style: kTitleTextStyle),

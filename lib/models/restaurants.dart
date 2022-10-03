@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodly/models/restaurants_details_model.dart';
 import 'package:foodly/reusables/constants.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Restaurants {
   Restaurants({
@@ -60,15 +62,24 @@ class RestaurantsWidget extends StatelessWidget {
       padding: const EdgeInsets.only(right: 20),
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      image,
-                    ),
-                    fit: BoxFit.fill)),
-            height: height.h,
-            width: width.w,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const RestaurantDetails(),
+                      type: PageTransitionType.rightToLeft));
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        image,
+                      ),
+                      fit: BoxFit.fill)),
+              height: height.h,
+              width: width.w,
+            ),
           ),
           addVerticalSpacing(16),
           Text(name, style: kTitleTextStyle),
