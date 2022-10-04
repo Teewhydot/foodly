@@ -5,6 +5,8 @@ import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/carousel_slider_widget.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/screens/bottom_navigation_pages/orders.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AddToOrderPage extends StatefulWidget {
   const AddToOrderPage({Key? key}) : super(key: key);
@@ -342,9 +344,15 @@ class _AddToOrderPageState extends State<AddToOrderPage> {
                 ],
               ),
               addVerticalSpacing(20),
-              ReusableButton(
-                  const Text('Add to order ( \$11.98 )'), () {}, kGreenColor),
+              ReusableButton(const Text('Add to order ( \$11.98 )'), () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const Orders(),
+                        type: PageTransitionType.rightToLeft));
+              }, kGreenColor),
               addVerticalSpacing(10),
+              const ExpansionTile(),
             ],
           ),
         ),
@@ -430,6 +438,91 @@ class SpecialInstructions extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ExpansionTile extends StatefulWidget {
+  const ExpansionTile({Key? key}) : super(key: key);
+
+  @override
+  State<ExpansionTile> createState() => _ExpansionTileState();
+}
+
+class _ExpansionTileState extends State<ExpansionTile> {
+  @override
+  Widget build(BuildContext context) {
+    final TextEditingController specialInstructionsController =
+        TextEditingController();
+    bool isExpanded = false;
+    return ExpansionPanelList(
+      expansionCallback: (int index, bool isExpanded) {
+        setState(() {
+          isExpanded = !isExpanded;
+        });
+      },
+      children: [
+        ExpansionPanel(
+          headerBuilder: (BuildContext context, bool isExpanded) {
+            return Container(
+              height: 50,
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Add special instructions'),
+                ],
+              ),
+            );
+          },
+          body: Column(children: [
+            TextField(
+              controller: specialInstructionsController,
+              cursorColor: Colors.black,
+              minLines: 7,
+              maxLines: 7,
+              keyboardType: TextInputType.multiline,
+              onChanged: (newValue) {},
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                focusColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 0,
+                      style: BorderStyle.none),
+                  borderRadius: BorderRadius.circular(25.r),
+                ),
+                border: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(width: 0, style: BorderStyle.none),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 10.0.h, horizontal: 20.0.w),
+              ),
+            ),
+            addVerticalSpacing(10),
+            ExpandableButton(
+              // <-- Collapses when tapped on
+              child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25.r),
+                  ),
+                  height: 50,
+                  width: 100,
+                  child: Center(
+                      child: Text(
+                    "Cancel",
+                    style: kDescTextStyle,
+                  ))),
+            ),
+          ]),
+          isExpanded: isExpanded,
+        ),
+      ],
     );
   }
 }
