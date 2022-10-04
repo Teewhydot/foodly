@@ -1,10 +1,8 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/carousel_slider_widget.dart';
-import 'package:foodly/reusables/widgets/reusable_button.dart';
 
 class AddToOrderPage extends StatefulWidget {
   const AddToOrderPage({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class AddToOrderPage extends StatefulWidget {
 
 class _AddToOrderPageState extends State<AddToOrderPage> {
   int? radioChoiceTop, radioChoiceBottom;
-  bool isAsiVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +61,7 @@ class _AddToOrderPageState extends State<AddToOrderPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Choice of top cookie',
-                    style: kBlackText,
-                  ),
+                  const Text('Choice of top cookie'),
                   Container(
                     height: 40,
                     width: 100,
@@ -216,10 +210,7 @@ class _AddToOrderPageState extends State<AddToOrderPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Choice of bottom cookie',
-                    style: kBlackText,
-                  ),
+                  const Text('Choice of bottom cookie'),
                   Container(
                     height: 40,
                     width: 100,
@@ -316,119 +307,9 @@ class _AddToOrderPageState extends State<AddToOrderPage> {
                   });
                 },
               ),
-              addVerticalSpacing(10),
-              const SpecialInstructions(),
-              addVerticalSpacing(30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CircleAvatar(
-                    backgroundColor: kGreenColor,
-                    child: Icon(
-                      Icons.remove,
-                      color: Colors.white,
-                    ),
-                  ),
-                  addHorizontalSpacing(10),
-                  const Text('01'),
-                  addHorizontalSpacing(10),
-                  const CircleAvatar(
-                    backgroundColor: kGreenColor,
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              addVerticalSpacing(20),
-              ReusableButton(
-                  const Text('Add to order ( \$11.98 )'), () {}, kGreenColor),
-              addVerticalSpacing(10),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class SpecialInstructions extends StatelessWidget {
-  const SpecialInstructions({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final TextEditingController specialInstructionsController =
-        TextEditingController();
-    return ExpandableNotifier(
-      // <-- Provides ExpandableController to its children
-      child: Column(
-        children: [
-          Expandable(
-            // <-- Driven by ExpandableController from ExpandableNotifier
-            collapsed: ExpandableButton(
-              // <-- Expands when tapped on the cover photo
-              child: Container(
-                height: 50,
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text('Add special instructions'),
-                    Icon(Icons.arrow_forward_ios),
-                  ],
-                ),
-              ),
-            ),
-            expanded: ScrollOnExpand(
-              child: Column(children: [
-                TextField(
-                  controller: specialInstructionsController,
-                  cursorColor: Colors.black,
-                  minLines: 7,
-                  maxLines: 7,
-                  keyboardType: TextInputType.multiline,
-                  onChanged: (newValue) {},
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    focusColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 0,
-                          style: BorderStyle.none),
-                      borderRadius: BorderRadius.circular(25.r),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 0, style: BorderStyle.none),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(
-                        vertical: 10.0.h, horizontal: 20.0.w),
-                  ),
-                ),
-                addVerticalSpacing(10),
-                ExpandableButton(
-                  // <-- Collapses when tapped on
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25.r),
-                      ),
-                      height: 50,
-                      width: 100,
-                      child: Center(
-                          child: Text(
-                        "Cancel",
-                        style: kDescTextStyle,
-                      ))),
-                ),
-              ]),
-            ),
-          ),
-        ],
       ),
     );
   }
