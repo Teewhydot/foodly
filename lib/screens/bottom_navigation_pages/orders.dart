@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodly/reusables/constants.dart';
+import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/screens/add_card_details.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Orders extends StatelessWidget {
   const Orders({Key? key}) : super(key: key);
@@ -61,6 +64,14 @@ class Orders extends StatelessWidget {
                   style: kBlackText,
                 ),
                 tail: Icon(Icons.arrow_forward_ios)),
+            addVerticalSpacing(10),
+            ReusableButton(const Text('Buy'), () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const AddCardDetails(),
+                      type: PageTransitionType.rightToLeft));
+            }, kGreenColor),
           ],
         ),
       ),
