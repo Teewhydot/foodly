@@ -17,7 +17,7 @@ class CarouselSliderWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(5.0.r),
       child: SizedBox(
-        height: 185.h,
+        height: 250.h,
         width: 335.w,
         child: Carousel(
           autoplay: true,

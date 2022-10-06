@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodly/filter.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/models/featured_partners.dart';
 import 'package:foodly/models/restaurants.dart';
@@ -170,6 +171,23 @@ class HomePage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
+        actions: [
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const Filter(),
+                        type: PageTransitionType.topToBottom));
+              },
+              child: const Center(
+                  child: SizedBox(
+                      height: 20,
+                      child: Text(
+                        'Filter',
+                        style: kBlackText,
+                      ))))
+        ],
       ),
       body: HomeBody(
           featuredPartners: featuredPartners, restaurants: restaurants),
@@ -393,7 +411,7 @@ class FeaturedPartners extends StatelessWidget {
         itemCount: featuredPartners.length,
         itemBuilder: (context, index) {
           return FeaturedPartnerWidget(
-            width: 250.0.w,
+            width: 200.0.w,
             height: 200.0.h,
             image: featuredPartners[index].image,
             name: featuredPartners[index].name,

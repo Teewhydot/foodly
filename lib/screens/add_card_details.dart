@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodly/filter.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AddCardDetails extends StatelessWidget {
   const AddCardDetails({Key? key}) : super(key: key);
@@ -216,9 +218,13 @@ class AddCardDetails extends StatelessWidget {
                     Text(
                       'Add Card',
                       style: kBlackText.copyWith(color: kWhiteColor),
-                    ),
-                    () {},
-                    kGreenColor),
+                    ), () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: Filter(),
+                          type: PageTransitionType.rightToLeft));
+                }, kGreenColor),
                 addVerticalSpacing(10),
                 LocationButton(
                     const Text(
