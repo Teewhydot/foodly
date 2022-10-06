@@ -16,6 +16,7 @@ class AddCardDetails extends StatelessWidget {
     final TextEditingController cardCvvController = TextEditingController();
     return Scaffold(
       backgroundColor: kWhiteColor,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
@@ -60,7 +61,6 @@ class AddCardDetails extends StatelessWidget {
                     children: [
                       Expanded(
                         child: TextField(
-                          controller: cardNumberController,
                           cursorColor: Colors.black,
                           keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
@@ -115,11 +115,10 @@ class AddCardDetails extends StatelessWidget {
                           children: [
                             Expanded(
                               child: TextField(
-                                controller: cardExpiryController,
                                 cursorColor: Colors.black,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.digitsOnly
+                                  FilteringTextInputFormatter.digitsOnly,
                                 ],
                                 onChanged: (newValue) {},
                                 decoration: InputDecoration(
@@ -133,11 +132,6 @@ class AddCardDetails extends StatelessWidget {
                                         style: BorderStyle.solid),
                                     borderRadius: BorderRadius.circular(8.r),
                                   ),
-                                  // prefixIcon: Padding(
-                                  //   padding: EdgeInsets.all(8.0.r),
-                                  //   child: GestureDetector(
-                                  //       onTap: () async {}, child: const Icon(Icons.credit_card_rounded)),
-                                  // ),
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         width: 1,
@@ -167,7 +161,6 @@ class AddCardDetails extends StatelessWidget {
                           children: [
                             Expanded(
                               child: TextField(
-                                controller: cardCvvController,
                                 cursorColor: Colors.black,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
@@ -185,11 +178,6 @@ class AddCardDetails extends StatelessWidget {
                                         style: BorderStyle.solid),
                                     borderRadius: BorderRadius.circular(8.r),
                                   ),
-                                  // prefixIcon: Padding(
-                                  //   padding: EdgeInsets.all(8.0.r),
-                                  //   child: GestureDetector(
-                                  //       onTap: () async {}, child: const Icon(Icons.credit_card_rounded)),
-                                  // ),
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         width: 1,

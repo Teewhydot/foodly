@@ -199,9 +199,9 @@ class RestaurantDetails extends StatelessWidget {
                 Row(
                   children: [
                     addHorizontalSpacing(10),
-                    Text('4.5', style: kTitleTextStyle),
+                    const Text('4.5', style: kTitleTextStyle),
                     addHorizontalSpacing(5),
-                    Icon(
+                    const Icon(
                       Icons.star,
                       color: kGreenColor,
                       size: 20,

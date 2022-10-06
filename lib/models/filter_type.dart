@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,11 +16,10 @@ class FilterTypeWidget extends StatelessWidget {
   final name;
   final count;
 
-  const FilterTypeWidget(
-      {super.key,
-      required this.image,
-      required this.name,
-      required this.count});
+  const FilterTypeWidget({super.key,
+    required this.image,
+    required this.name,
+    required this.count});
 
   @override
   Widget build(BuildContext context) {
