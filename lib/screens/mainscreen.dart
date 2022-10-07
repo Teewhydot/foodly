@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final pages = [
     const HomePage(),
-    const SearchPage(),
+    const SearchRestaurant(),
     Container(),
     Container(),
   ];

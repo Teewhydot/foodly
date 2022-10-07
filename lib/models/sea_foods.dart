@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodly/models/add_to_order.dart';
 import 'package:foodly/reusables/constants.dart';
+import 'package:foodly/screens/add_to_order.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SeaFoods {

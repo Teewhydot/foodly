@@ -30,6 +30,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/search_images/
 flutter_native_splash:
   color: "#ffffff"
   image: assets/images/logobgremoved.png
