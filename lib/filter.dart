@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/models/filter_type.dart';
 import 'package:foodly/reusables/constants.dart';
+import 'package:foodly/reusables/widgets/reusable_button.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Filter extends StatefulWidget {
@@ -18,19 +19,19 @@ class _FilterState extends State<Filter> {
     int activeFilter = 0;
     List<FilterType> filterTypeList = [
       FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 120),
+          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 320),
       FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 120),
+          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 520),
       FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 120),
+          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 125),
       FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 120),
+          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 126),
       FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 120),
+          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 165),
       FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 120),
+          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 233),
       FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 120),
+          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 755),
     ];
     final filterPages = [
       Column(
@@ -80,240 +81,246 @@ class _FilterState extends State<Filter> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            addVerticalSpacing(20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Categories',
-                  style: kBlackText,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              child: const Filter(),
-                              type: PageTransitionType.topToBottom));
-                    },
-                    child: const Center(
-                        child: SizedBox(
-                            height: 20,
-                            child: Text(
-                              'Clear all',
-                              style: kBlackText,
-                            ))))
-              ],
-            ),
             Column(
               children: [
                 addVerticalSpacing(20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('All'),
-                        onSelected: (bool isChecked) {},
-                      ),
+                    const Text(
+                      'Categories',
+                      style: kBlackText,
                     ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Brunch'),
-                        onSelected: (bool isChecked) {},
-                      ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  child: const Filter(),
+                                  type: PageTransitionType.topToBottom));
+                        },
+                        child: const Center(
+                            child: SizedBox(
+                                height: 20,
+                                child: Text(
+                                  'Clear all',
+                                  style: kBlackText,
+                                ))))
+                  ],
+                ),
+                Column(
+                  children: [
+                    addVerticalSpacing(20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('All'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Brunch'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Dinner'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Burger'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Chinese'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Dinner'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Burger'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Chinese'),
-                        onSelected: (bool isChecked) {},
-                      ),
+                    addVerticalSpacing(10),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Pizza'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Salad'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Breakfast'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Soup'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Dinner'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                addVerticalSpacing(10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Pizza'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Salad'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Breakfast'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Soup'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Dinner'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            addVerticalSpacing(20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Dietary',
-                  style: kBlackText,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              child: const Filter(),
-                              type: PageTransitionType.topToBottom));
-                    },
-                    child: const Center(
-                        child: SizedBox(
-                            height: 20,
-                            child: Text(
-                              'Clear all',
-                              style: kBlackText,
-                            ))))
-              ],
-            ),
-            Column(
-              children: [
                 addVerticalSpacing(20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Any'),
-                        onSelected: (bool isChecked) {},
-                      ),
+                    const Text(
+                      'Dietary',
+                      style: kBlackText,
                     ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Vegetarian'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Vegan'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('Glutton free'),
-                        onSelected: (bool isChecked) {},
-                      ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  child: const Filter(),
+                                  type: PageTransitionType.topToBottom));
+                        },
+                        child: const Center(
+                            child: SizedBox(
+                                height: 20,
+                                child: Text(
+                                  'Clear all',
+                                  style: kBlackText,
+                                ))))
+                  ],
+                ),
+                Column(
+                  children: [
+                    addVerticalSpacing(20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Any'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Vegetarian'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Vegan'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('Glutton free'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-            addVerticalSpacing(20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Price',
-                  style: kBlackText,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              child: const Filter(),
-                              type: PageTransitionType.topToBottom));
-                    },
-                    child: const Center(
-                        child: SizedBox(
-                            height: 20,
-                            child: Text(
-                              'Clear all',
-                              style: kBlackText,
-                            ))))
-              ],
-            ),
-            Column(
-              children: [
                 addVerticalSpacing(20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('\$'),
-                        onSelected: (bool isChecked) {},
-                      ),
+                    const Text(
+                      'Price',
+                      style: kBlackText,
                     ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('\$\$'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('\$\$\$'),
-                        onSelected: (bool isChecked) {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableFilterChip(
-                        isAllSelected: isAllSelected,
-                        text: const Text('\$\$\$\$\$\$'),
-                        onSelected: (bool isChecked) {},
-                      ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  child: const Filter(),
+                                  type: PageTransitionType.topToBottom));
+                        },
+                        child: const Center(
+                            child: SizedBox(
+                                height: 20,
+                                child: Text(
+                                  'Clear all',
+                                  style: kBlackText,
+                                ))))
+                  ],
+                ),
+                Column(
+                  children: [
+                    addVerticalSpacing(20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('\$'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('\$\$'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('\$\$\$'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                        Expanded(
+                          child: ReusableFilterChip(
+                            isAllSelected: isAllSelected,
+                            text: const Text('\$\$\$\$\$\$'),
+                            onSelected: (bool isChecked) {},
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
+            ReusableButton(const Text('APPLY FILTERS'), () {}, kGreenColor),
           ],
         ),
       ),
