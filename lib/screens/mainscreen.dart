@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/screens/bottom_navigation_pages/home.dart';
+import 'package:foodly/screens/bottom_navigation_pages/search.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final pages = [
     const HomePage(),
-    Container(),
+    const SearchPage(),
     Container(),
     Container(),
   ];
