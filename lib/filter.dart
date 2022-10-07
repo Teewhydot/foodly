@@ -37,7 +37,7 @@ class _FilterState extends State<Filter> {
       Column(
         children: [
           ListView.builder(
-            key: const PageStorageKey('featured-partners'),
+            key: const PageStorageKey('filter widget'),
             itemCount: filterTypeList.length,
             itemBuilder: (context, index) {
               return FilterTypeWidget(

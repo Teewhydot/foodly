@@ -16,10 +16,45 @@ class FilterTypeWidget extends StatelessWidget {
   final name;
   final count;
 
-  const FilterTypeWidget({super.key,
-    required this.image,
-    required this.name,
-    required this.count});
+  const FilterTypeWidget(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      image,
+                    ),
+                    fit: BoxFit.fill)),
+            height: 184.h,
+            width: 164.w,
+          ),
+        ),
+        Text('$name($count)')
+      ],
+    );
+  }
+}
+
+class FilterTypeWidgetClone extends StatelessWidget {
+  final image;
+  final name;
+  final count;
+
+  const FilterTypeWidgetClone(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.count});
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +62,18 @@ class FilterTypeWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      image,
-                    ),
-                    fit: BoxFit.fill)),
-            height: 124.h,
-            width: 100.w,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        image,
+                      ),
+                      fit: BoxFit.fill)),
+              height: 184.h,
+              width: 164.w,
+            ),
           ),
           Text('$name($count)')
         ],

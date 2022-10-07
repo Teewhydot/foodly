@@ -23,4 +23,22 @@ class Assets {
   static const String imagesSI = 'assets/images/sI.png';
   static const String imagesTime = 'assets/images/time.png';
   static const String imagesTimer = 'assets/images/timer.png';
+  static const String searchImagesFilter1 = 'assets/search_images/filter1.png';
+  static const String searchImagesFilter2 = 'assets/search_images/filter2.png';
+  static const String searchImagesFilter3 = 'assets/search_images/filter3.png';
+  static const String searchImagesFilter4 = 'assets/search_images/filter4.png';
+  static const String searchImagesFilterblack1 =
+      'assets/search_images/filterblack1.png';
+  static const String searchImagesFilterblack2 =
+      'assets/search_images/filterblack2.png';
+  static const String searchImagesFilterblack3 =
+      'assets/search_images/filterblack3.png';
+  static const String searchImagesFilterblack4 =
+      'assets/search_images/filterblack4.png';
+  static const String searchImagesFilterblack5 =
+      'assets/search_images/filterblack5.png';
+  static const String searchImagesFilterblack6 =
+      'assets/search_images/filterblack6.png';
+  static const String searchImagesFilterblack7 =
+      'assets/search_images/filterblack7.png';
 }

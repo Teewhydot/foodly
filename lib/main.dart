@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodly/screens/onboarding/onboarding.dart';
+import 'package:foodly/screens/bottom_navigation_pages/search.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const Onboarding(),
+        home: const SearchPage(),
       ),
     );
   }
