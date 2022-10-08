@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/custom_listtile.dart';
+import 'package:foodly/screens/cards_page.dart';
 import 'package:foodly/screens/change_password.dart';
 import 'package:foodly/screens/profile_page.dart';
 import 'package:page_transition/page_transition.dart';
@@ -54,7 +55,13 @@ class ProfilePage extends StatelessWidget {
                 leading: const Icon(Icons.credit_card),
                 heading: const Text('Payment methods'),
                 subHeading: const Text('Add your credit or debit cards'),
-                onTap: () {}),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const CardsPage(),
+                          type: PageTransitionType.rightToLeft));
+                }),
             CustomListTile(
                 leading: const Icon(Icons.location_on),
                 heading: const Text('Locations'),
