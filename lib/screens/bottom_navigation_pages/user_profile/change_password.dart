@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodly/models/notification_widgets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
-import 'package:foodly/screens/order_status_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 class ChangePasswordPage extends StatelessWidget {

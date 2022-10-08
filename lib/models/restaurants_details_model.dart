@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/models/featured_partners.dart';
-import 'package:foodly/models/restaurants.dart';
 import 'package:foodly/models/sea_foods.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/carousel_slider_widget.dart';
@@ -72,96 +71,6 @@ class RestaurantDetails extends StatelessWidget {
         location: "Kampala, Uganda",
         rating: "4.5",
         time: "30-40 min",
-      ),
-    ];
-    List<Restaurants> restaurants = [
-      Restaurants(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: 4.5,
-        numberOfRatings: 100,
-        id: 1,
-        time: "30-40 min",
-        deliveryFee: "UGX 2000",
-        foodType: ["Coffee", "Tea", "Bakery"],
-      ),
-      Restaurants(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: 4.5,
-        numberOfRatings: 100,
-        id: 1,
-        time: "30-40 min",
-        deliveryFee: "UGX 2000",
-        foodType: ["Coffee", "Tea", "Bakery"],
-      ),
-      Restaurants(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: 4.5,
-        numberOfRatings: 100,
-        id: 1,
-        time: "30-40 min",
-        deliveryFee: "UGX 2000",
-        foodType: ["Coffee", "Tea", "Bakery"],
-      ),
-      Restaurants(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: 4.5,
-        numberOfRatings: 100,
-        id: 1,
-        time: "30-40 min",
-        deliveryFee: "UGX 2000",
-        foodType: ["Coffee", "Tea", "Bakery"],
-      ),
-      Restaurants(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: 4.5,
-        numberOfRatings: 100,
-        id: 1,
-        time: "30-40 min",
-        deliveryFee: "UGX 2000",
-        foodType: ["Coffee", "Tea", "Bakery"],
-      ),
-      Restaurants(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: 4.5,
-        numberOfRatings: 100,
-        id: 1,
-        time: "30-40 min",
-        deliveryFee: "UGX 2000",
-        foodType: ["Coffee", "Tea", "Bakery"],
-      ),
-      Restaurants(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: 4.5,
-        numberOfRatings: 100,
-        id: 1,
-        time: "30-40 min",
-        deliveryFee: "UGX 2000",
-        foodType: ["Coffee", "Tea", "Bakery"],
-      ),
-      Restaurants(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: 4.5,
-        numberOfRatings: 100,
-        id: 1,
-        time: "30-40 min",
-        deliveryFee: "UGX 2000",
-        foodType: ["Coffee", "Tea", "Bakery"],
       ),
     ];
     return Scaffold(

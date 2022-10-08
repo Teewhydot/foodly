@@ -11,9 +11,6 @@ class AddCardDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController cardNumberController = TextEditingController();
-    final TextEditingController cardExpiryController = TextEditingController();
-    final TextEditingController cardCvvController = TextEditingController();
     return Scaffold(
       backgroundColor: kWhiteColor,
       resizeToAvoidBottomInset: false,
@@ -210,7 +207,7 @@ class AddCardDetails extends StatelessWidget {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: Filter(),
+                          child: const Filter(),
                           type: PageTransitionType.rightToLeft));
                 }, kGreenColor),
                 addVerticalSpacing(10),

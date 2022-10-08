@@ -1,10 +1,10 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
-import 'package:foodly/generated/assets.dart';
-import 'package:foodly/models/filter_type.dart';
+import 'package:foodly/models/notification_widgets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
 import 'package:foodly/screens/mainscreen.dart';
-import 'package:foodly/screens/order_status_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Filter extends StatefulWidget {
@@ -18,48 +18,6 @@ class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
     bool isAllSelected = false;
-    int activeFilter = 0;
-    List<FilterType> filterTypeList = [
-      FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 320),
-      FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 520),
-      FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 125),
-      FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 126),
-      FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 165),
-      FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 233),
-      FilterType(
-          image: Assets.imagesFeaturedpartners, text: 'Burgers', count: 755),
-    ];
-    final filterPages = [
-      Column(
-        children: [
-          ListView.builder(
-            key: const PageStorageKey('filter widget'),
-            itemCount: filterTypeList.length,
-            itemBuilder: (context, index) {
-              return FilterTypeWidget(
-                image: filterTypeList[index].image,
-                name: filterTypeList[index].text,
-                count: filterTypeList[index].count,
-              );
-            },
-            scrollDirection: Axis.horizontal,
-            physics: const ClampingScrollPhysics(),
-            // children: featuredPartners,
-          ),
-        ],
-      ),
-      Container(),
-      Container(),
-      Container(),
-    ];
-
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

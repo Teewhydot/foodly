@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -6,12 +8,11 @@ class CustomListTile extends StatelessWidget {
   final heading;
   final subHeading;
 
-  const CustomListTile(
-      {super.key,
-      required this.leading,
-      required this.heading,
-      required this.subHeading,
-      required this.onTap});
+  const CustomListTile({super.key,
+    required this.leading,
+    required this.heading,
+    required this.subHeading,
+    required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +31,10 @@ class CustomListTileWithSwitch extends StatelessWidget {
   final heading;
   final subHeading;
 
-  const CustomListTileWithSwitch(
-      {super.key,
-      required this.heading,
-      required this.subHeading,
-      required this.onTap});
+  const CustomListTileWithSwitch({super.key,
+    required this.heading,
+    required this.subHeading,
+    required this.onTap});
 
   @override
   Widget build(BuildContext context) {

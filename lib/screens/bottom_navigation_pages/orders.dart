@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
-import 'package:foodly/screens/add_card_details.dart';
+import 'package:foodly/screens/cards_screens/add_card_details.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Orders extends StatelessWidget {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/screens/cards_screens/card_type_page.dart';
+import 'package:page_transition/page_transition.dart';
 
 class CardsPage extends StatelessWidget {
   const CardsPage({Key? key}) : super(key: key);
@@ -39,8 +41,13 @@ class CardsPage extends StatelessWidget {
             Expanded(
                 child: Center(child: Image.asset(Assets.imagesEmptycardtext))),
             addVerticalSpacing(30),
-            LocationButton(
-                const Text('Add credit/debit cards'), () {}, kWhiteColor),
+            LocationButton(const Text('Add credit/debit cards'), () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const CardTypePage(),
+                      type: PageTransitionType.rightToLeft));
+            }, kWhiteColor),
             Expanded(
                 child: Container(
               height: 100,
