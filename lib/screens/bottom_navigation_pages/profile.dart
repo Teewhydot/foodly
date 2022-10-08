@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/custom_listtile.dart';
+import 'package:foodly/screens/change_password.dart';
+import 'package:foodly/screens/profile_page.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -29,12 +32,24 @@ class ProfilePage extends StatelessWidget {
                 leading: const Icon(Icons.person),
                 heading: const Text('Profile information'),
                 subHeading: const Text('Change your account information'),
-                onTap: () {}),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const ProfileInfoPage(),
+                          type: PageTransitionType.rightToLeft));
+                }),
             CustomListTile(
                 leading: const Icon(Icons.lock),
                 heading: const Text('Change password'),
                 subHeading: const Text('Change your account password'),
-                onTap: () {}),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const ChangePasswordPage(),
+                          type: PageTransitionType.rightToLeft));
+                }),
             CustomListTile(
                 leading: const Icon(Icons.credit_card),
                 heading: const Text('Payment methods'),
@@ -52,22 +67,22 @@ class ProfilePage extends StatelessWidget {
                     const Text('Connect your facebook, twitter , github etc'),
                 onTap: () {}),
             addVerticalSpacing(30),
-            Text('Notifications'),
+            const Text('Notifications'),
             addVerticalSpacing(20),
             CustomListTileWithSwitch(
-                heading: Text('Push Notifications'),
-                subHeading: Text('For daily updates'),
+                heading: const Text('Push Notifications'),
+                subHeading: const Text('For daily updates'),
                 onTap: () {}),
             CustomListTileWithSwitch(
-                heading: Text('SMS Notifications'),
-                subHeading: Text('For daily updates'),
+                heading: const Text('SMS Notifications'),
+                subHeading: const Text('For daily updates'),
                 onTap: () {}),
             CustomListTileWithSwitch(
-                heading: Text('Promotional Notifications'),
-                subHeading: Text('For daily updates'),
+                heading: const Text('Promotional Notifications'),
+                subHeading: const Text('For daily updates'),
                 onTap: () {}),
             addVerticalSpacing(30),
-            Text('More'),
+            const Text('More'),
             addVerticalSpacing(20),
             CustomListTile(
                 leading: const Icon(Icons.star),

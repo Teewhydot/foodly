@@ -5,8 +5,19 @@ import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/screens/mainscreen.dart';
 import 'package:page_transition/page_transition.dart';
 
-class PaymentSuccess extends StatelessWidget {
-  const PaymentSuccess({Key? key}) : super(key: key);
+class SuccessActionWidget extends StatelessWidget {
+  final String heading;
+  final String subHeading;
+  final String buttonText;
+  final onpressed;
+
+  const SuccessActionWidget({
+    Key? key,
+    required this.heading,
+    required this.subHeading,
+    required this.buttonText,
+    required this.onpressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +45,7 @@ class PaymentSuccess extends StatelessWidget {
                     Flexible(
                         child: Center(
                       child: Text(
-                        'You placed the order Successfully',
+                        heading,
                         style: kBoldTextStyle.copyWith(fontSize: 25),
                       ),
                     )),
@@ -42,7 +53,7 @@ class PaymentSuccess extends StatelessWidget {
                     Flexible(
                         child: Center(
                       child: Text(
-                        'You will get your food within 25minutes. Thanks for using our services and please enjoy your Foodly :)',
+                        subHeading,
                         style: kDescTextStyle,
                       ),
                     )),
@@ -50,15 +61,9 @@ class PaymentSuccess extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    child: const MainScreen(),
-                                    type: PageTransitionType.rightToLeft));
-                          },
+                          onPressed: onpressed,
                           child: Text(
-                            'KEEP EXPLORING',
+                            buttonText,
                             style: kBlackText.copyWith(color: kGreenColor),
                           )),
                     ),
@@ -81,8 +86,8 @@ class PaymentSuccess extends StatelessWidget {
   }
 }
 
-class PaymentFailed extends StatelessWidget {
-  const PaymentFailed({Key? key}) : super(key: key);
+class FailedActionWidget extends StatelessWidget {
+  const FailedActionWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

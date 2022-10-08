@@ -3,6 +3,7 @@ import 'package:foodly/generated/assets.dart';
 import 'package:foodly/models/filter_type.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/screens/mainscreen.dart';
 import 'package:foodly/screens/order_status_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -325,7 +326,18 @@ class _FilterState extends State<Filter> {
               Navigator.push(
                   context,
                   PageTransition(
-                      child: const PaymentSuccess(),
+                      child: SuccessActionWidget(
+                        heading: 'Your order has been placed successfuly',
+                        subHeading: '',
+                        buttonText: 'KEEP EXPLORING',
+                        onpressed: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  child: const MainScreen(),
+                                  type: PageTransitionType.topToBottom));
+                        },
+                      ),
                       type: PageTransitionType.bottomToTop));
             }, kGreenColor),
           ],
