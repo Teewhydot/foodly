@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/screens/bottom_navigation_pages/home.dart';
-import 'package:foodly/screens/bottom_navigation_pages/profile.dart';
 import 'package:foodly/screens/bottom_navigation_pages/search/search.dart';
 import 'package:foodly/screens/bottom_navigation_pages/search/search_results.dart';
+import 'package:foodly/screens/bottom_navigation_pages/user_profile/profile.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/custom_listtile.dart';
-import 'package:foodly/screens/cards_page.dart';
-import 'package:foodly/screens/change_password.dart';
-import 'package:foodly/screens/profile_page.dart';
+import 'package:foodly/screens/add_social_media_screen.dart';
+import 'package:foodly/screens/cards_screens/cards_page.dart';
 import 'package:page_transition/page_transition.dart';
+
+import 'change_password.dart';
+import 'profile_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -72,7 +74,13 @@ class ProfilePage extends StatelessWidget {
                 heading: const Text('Add social media accounts'),
                 subHeading:
                     const Text('Connect your facebook, twitter , github etc'),
-                onTap: () {}),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const AddSocialMedia(),
+                          type: PageTransitionType.rightToLeft));
+                }),
             addVerticalSpacing(30),
             const Text('Notifications'),
             addVerticalSpacing(20),
