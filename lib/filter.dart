@@ -325,7 +325,7 @@ class _FilterState extends State<Filter> {
               Navigator.push(
                   context,
                   PageTransition(
-                      child: const OrderStatus(),
+                      child: const PaymentSuccess(),
                       type: PageTransitionType.bottomToTop));
             }, kGreenColor),
           ],

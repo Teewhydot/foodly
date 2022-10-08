@@ -5,8 +5,8 @@ import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/screens/mainscreen.dart';
 import 'package:page_transition/page_transition.dart';
 
-class OrderStatus extends StatelessWidget {
-  const OrderStatus({Key? key}) : super(key: key);
+class PaymentSuccess extends StatelessWidget {
+  const PaymentSuccess({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
