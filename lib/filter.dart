@@ -3,6 +3,7 @@ import 'package:foodly/generated/assets.dart';
 import 'package:foodly/models/filter_type.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/screens/order_status_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Filter extends StatefulWidget {
@@ -320,7 +321,13 @@ class _FilterState extends State<Filter> {
                 ),
               ],
             ),
-            ReusableButton(const Text('APPLY FILTERS'), () {}, kGreenColor),
+            ReusableButton(const Text('APPLY FILTERS'), () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const OrderStatus(),
+                      type: PageTransitionType.bottomToTop));
+            }, kGreenColor),
           ],
         ),
       ),
