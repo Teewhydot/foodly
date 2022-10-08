@@ -412,7 +412,7 @@ class FeaturedPartners extends StatelessWidget {
         itemBuilder: (context, index) {
           return FeaturedPartnerWidget(
             width: 200.0.w,
-            height: 200.0.h,
+            height: 220.0.h,
             image: featuredPartners[index].image,
             name: featuredPartners[index].name,
             location: featuredPartners[index].location,

@@ -41,4 +41,12 @@ class Assets {
       'assets/search_images/filterblack6.png';
   static const String searchImagesFilterblack7 =
       'assets/search_images/filterblack7.png';
+  static const String searchResultsSearchresultb1 =
+      'assets/search_results/searchresultb1.png';
+  static const String searchResultsSearchresultb2 =
+      'assets/search_results/searchresultb2.png';
+  static const String searchResultsSearchresults1 =
+      'assets/search_results/searchresults1.png';
+  static const String searchResultsSearchresults2 =
+      'assets/search_results/searchresults2.png';
 }

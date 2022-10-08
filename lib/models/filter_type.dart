@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodly/screens/bottom_navigation_pages/search.dart';
+import 'package:foodly/screens/bottom_navigation_pages/search/search.dart';
 import 'package:page_transition/page_transition.dart';
 
 class FilterType {
