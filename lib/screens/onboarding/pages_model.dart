@@ -16,25 +16,29 @@ class PageModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        addVerticalSpacing(20),
         Expanded(
-            flex: 5,
-            child: SizedBox(
-                height: 383.h, width: 376.w, child: Image.asset(imageAsset))),
-        addVerticalSpacing(10),
-        Expanded(flex: 1, child: Text(heading, style: kBoldTextStyle)),
-        Expanded(
-          flex: 1,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              description,
-              style: kDescTextStyle,
-            ),
+          flex: 3,
+          child: Column(
+            children: [
+              addVerticalSpacing(40),
+              SizedBox(
+                  height: 350.h, width: 350.w, child: Image.asset(imageAsset)),
+              addVerticalSpacing(10),
+              Text(heading, style: kBoldTextStyle),
+              addVerticalSpacing(10),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  description,
+                  style: kDescTextStyle,
+                ),
+              ),
+            ],
           ),
         ),
+        Expanded(flex: 1, child: Column())
       ],
     );
   }
