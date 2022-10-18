@@ -81,170 +81,179 @@ class RestaurantDetails extends StatelessWidget {
           scrollDirection: Axis.vertical,
           children: [
             RestaurantDetail(featuredPartners: featuredPartners),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    addHorizontalSpacing(10),
-                    Text(
-                      'MacDonalds',
-                      style: kBoldTextStyle.copyWith(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                addVerticalSpacing(10),
-                Row(
-                  children: [
-                    addHorizontalSpacing(10),
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('vegan, fast food, chicken',
-                            style: kDescTextStyle)),
-                  ],
-                ),
-                addVerticalSpacing(10),
-                Row(
-                  children: [
-                    addHorizontalSpacing(10),
-                    const Text('4.5', style: kTitleTextStyle),
-                    addHorizontalSpacing(5),
-                    const Icon(
-                      Icons.star,
-                      color: kGreenColor,
-                      size: 20,
-                    ),
-                    Text('200+ ratings', style: kDescTextStyle),
-                  ],
-                ),
-                addVerticalSpacing(10),
-                Row(children: [
-                  addHorizontalSpacing(10),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                children: [
                   Row(
                     children: [
-                      const Icon(
-                        FontAwesomeIcons.alignRight,
-                        color: kGreenColor,
-                        size: 20,
+                      Text(
+                        'Mac Donalds',
+                        style: kBoldTextStyle.copyWith(
+                          color: Colors.black,
+                        ),
                       ),
-                      addHorizontalSpacing(5),
-                      const Text('Free Delivery'),
-                      addHorizontalSpacing(5),
-                      const Icon(
-                        FontAwesomeIcons.alignRight,
-                        color: kGreenColor,
-                        size: 20,
-                      ),
-                      addHorizontalSpacing(5),
-                      const Text('25 min '),
                     ],
                   ),
-                  SizedBox(
-                      width: 140,
-                      child: LocationButton(
-                          Text(
-                            'TAKE AWAY',
-                            style: kGreenText.copyWith(fontSize: 14),
-                          ),
-                          () {},
-                          kWhiteColor)),
-                ]),
-                addVerticalSpacing(10),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Featured partners',
-                  style: kTitleTextStyle.copyWith(
-                    fontSize: 23.sp,
+                  addVerticalSpacing(10),
+                  Row(
+                    children: [
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Text('vegan, fast food, chicken',
+                              style: kDescTextStyle)),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 320.h,
-              child: ListView.builder(
-                key: const PageStorageKey('best-picks'),
-                itemCount: featuredPartners.length,
-                itemBuilder: (context, index) {
-                  return FeaturedPartnerWidget(
-                    width: 240.0,
-                    height: 160.0,
-                    image: featuredPartners[index].image,
-                    name: featuredPartners[index].name,
-                    location: featuredPartners[index].location,
-                    rating: featuredPartners[index].rating,
-                    time: featuredPartners[index].time,
-                    deliveryFee: 'Free Delivery',
-                  );
-                },
-                scrollDirection: Axis.horizontal,
-                physics: const ClampingScrollPhysics(),
-                // children: featuredPartners,
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Most popular',
-                  style: kTitleTextStyle.copyWith(
-                    fontSize: 23.sp,
+                  addVerticalSpacing(10),
+                  Row(
+                    children: [
+                      const Text('4.5', style: kTitleTextStyle),
+                      addHorizontalSpacing(5),
+                      const Icon(
+                        Icons.star,
+                        color: kGreenColor,
+                        size: 20,
+                      ),
+                      Text('200+ ratings', style: kDescTextStyle),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 320.h,
-              child: ListView.builder(
-                key: const PageStorageKey('featured_partners'),
-                itemCount: featuredPartners.length,
-                itemBuilder: (context, index) {
-                  return FeaturedPartnerWidget(
-                    width: 240.0,
-                    height: 160.0,
-                    image: featuredPartners[index].image,
-                    name: featuredPartners[index].name,
-                    location: featuredPartners[index].location,
-                    rating: featuredPartners[index].rating,
-                    time: featuredPartners[index].time,
-                    deliveryFee: 'Free Delivery',
-                  );
-                },
-                scrollDirection: Axis.horizontal,
-                physics: const ClampingScrollPhysics(),
-                // children: featuredPartners,
+                  addVerticalSpacing(10),
+                  Row(children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          FontAwesomeIcons.alignRight,
+                          color: kGreenColor,
+                          size: 20,
+                        ),
+                        addHorizontalSpacing(5),
+                        const Text('Free Delivery'),
+                        addHorizontalSpacing(5),
+                        const Icon(
+                          FontAwesomeIcons.alignRight,
+                          color: kGreenColor,
+                          size: 20,
+                        ),
+                        addHorizontalSpacing(5),
+                        const Text('25 min '),
+                      ],
+                    ),
+                    SizedBox(
+                        width: 140,
+                        child: LocationButton(
+                            Text(
+                              'TAKE AWAY',
+                              style: kGreenText.copyWith(fontSize: 14),
+                            ),
+                            () {},
+                            kWhiteColor)),
+                  ]),
+                  addVerticalSpacing(10),
+                ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
                 children: [
-                  Text(
-                    'Sea foods',
-                    style: kTitleTextStyle.copyWith(
-                      fontSize: 23.sp,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Featured partners',
+                        style: kTitleTextStyle.copyWith(
+                          fontSize: 23.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                  addVerticalSpacing(20),
+                  SizedBox(
+                    height: 320.h,
+                    child: ListView.builder(
+                      key: const PageStorageKey('best-picks'),
+                      itemCount: featuredPartners.length,
+                      itemBuilder: (context, index) {
+                        return FeaturedPartnerWidget(
+                          width: 240.0,
+                          height: 160.0,
+                          image: featuredPartners[index].image,
+                          name: featuredPartners[index].name,
+                          location: featuredPartners[index].location,
+                          rating: featuredPartners[index].rating,
+                          time: featuredPartners[index].time,
+                          deliveryFee: 'Free Delivery',
+                        );
+                      },
+                      scrollDirection: Axis.horizontal,
+                      physics: const ClampingScrollPhysics(),
+                      // children: featuredPartners,
                     ),
                   ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Most popular',
+                        style: kTitleTextStyle.copyWith(
+                          fontSize: 23.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                  addVerticalSpacing(20),
+                  SizedBox(
+                    height: 320.h,
+                    child: ListView.builder(
+                      key: const PageStorageKey('featured_partners'),
+                      itemCount: featuredPartners.length,
+                      itemBuilder: (context, index) {
+                        return FeaturedPartnerWidget(
+                          width: 240.0,
+                          height: 160.0,
+                          image: featuredPartners[index].image,
+                          name: featuredPartners[index].name,
+                          location: featuredPartners[index].location,
+                          rating: featuredPartners[index].rating,
+                          time: featuredPartners[index].time,
+                          deliveryFee: 'Free Delivery',
+                        );
+                      },
+                      scrollDirection: Axis.horizontal,
+                      physics: const ClampingScrollPhysics(),
+                      // children: featuredPartners,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Sea foods',
+                          style: kTitleTextStyle.copyWith(
+                            fontSize: 23.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  addVerticalSpacing(20),
+                  ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: seafoods.length,
+                      itemBuilder: (context, index) {
+                        return SeafoodWidget(
+                            foodType: seafoods[index].foodType,
+                            ingredients: seafoods[index].ingredients,
+                            name: seafoods[index].name,
+                            price: seafoods[index].price,
+                            image: seafoods[index].image);
+                      }),
                 ],
               ),
-            ),
-            ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: seafoods.length,
-                itemBuilder: (context, index) {
-                  return SeafoodWidget(
-                      foodType: seafoods[index].foodType,
-                      ingredients: seafoods[index].ingredients,
-                      name: seafoods[index].name,
-                      price: seafoods[index].price,
-                      image: seafoods[index].image);
-                })
+            )
           ],
         ),
       ),
