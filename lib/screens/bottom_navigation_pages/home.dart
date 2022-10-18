@@ -215,7 +215,7 @@ class HomeBody extends StatelessWidget {
           addVerticalSpacing(24),
           const CarouselSliderWidget(
               Assets.imagesA1, Assets.imagesA2, Assets.imagesA3),
-          addVerticalSpacing(34),
+          addVerticalSpacing(14),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -243,9 +243,7 @@ class HomeBody extends StatelessWidget {
               ),
             ],
           ),
-          addVerticalSpacing(24),
           FeaturedPartners(featuredPartners: featuredPartners),
-          addVerticalSpacing(34),
           SizedBox(
             width: 335.w,
             height: 170.h,
@@ -405,13 +403,13 @@ class FeaturedPartners extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 320.h,
+      height: 300.h,
       child: ListView.builder(
         key: const PageStorageKey('featured-partners'),
         itemCount: featuredPartners.length,
         itemBuilder: (context, index) {
           return FeaturedPartnerWidget(
-            width: 200.0.w,
+            width: 190.w,
             height: 220.0.h,
             image: featuredPartners[index].image,
             name: featuredPartners[index].name,
