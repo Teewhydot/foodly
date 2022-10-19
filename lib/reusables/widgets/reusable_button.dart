@@ -42,10 +42,10 @@ class ReusableButton extends StatelessWidget {
 
 class LocationButton extends StatelessWidget {
   final Widget buttonText;
-  final onpressed;
+  final onPressed;
   final buttonColor;
 
-  const LocationButton(this.buttonText, this.onpressed, this.buttonColor,
+  const LocationButton(this.buttonText, this.onPressed, this.buttonColor,
       {super.key});
 
   @override
@@ -65,7 +65,7 @@ class LocationButton extends StatelessWidget {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             side: const BorderSide(color: kGreenColor)))),
-                onPressed: onpressed,
+                onPressed: onPressed,
                 child: buttonText,
               ),
             ),
