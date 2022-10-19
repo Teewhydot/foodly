@@ -23,22 +23,26 @@ class PageModel extends StatelessWidget {
           child: Column(
             children: [
               addVerticalSpacing(40),
-              SizedBox(
-                  height: 350.h, width: 350.w, child: Image.asset(imageAsset)),
-              addVerticalSpacing(10),
-              Text(heading, style: kBoldTextStyle),
-              addVerticalSpacing(10),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  description,
-                  style: kDescTextStyle,
+              Expanded(
+                flex: 4,
+                child: SizedBox(
+                    height: 300.h,
+                    width: 300.w,
+                    child: Image.asset(imageAsset)),
+              ),
+              Expanded(child: Text(heading, style: kBoldTextStyle)),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    description,
+                    style: kDescTextStyle,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        Expanded(flex: 1, child: Column())
       ],
     );
   }

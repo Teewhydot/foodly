@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodly/providers/provider.dart';
 import 'package:foodly/screens/onboarding/onboarding.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) {
+        return FoodlyProvider();
+      })
+    ],
+    builder: (context, _) {
+      return const MyApp();
+    },
+  ));
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -13,7 +25,6 @@ class MyApp extends StatelessWidget {
     return const Home();
   }
 }
-
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

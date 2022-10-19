@@ -10,15 +10,13 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   flutter_screenutil: ^5.5.4
-  url_launcher: ^6.1.5
-  toast: ^0.3.0
   page_transition: "^2.0.9"
   carousel_pro: ^1.0.0
   font_awesome_flutter: ^10.2.1
   introduction_screen: ^3.0.2
-  shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
   expandable: ^5.0.1
+  provider: ^6.0.4
 
 dev_dependencies:
   flutter_test:

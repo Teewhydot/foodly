@@ -23,7 +23,7 @@ class _OnboardingState extends State<Onboarding> {
     final onboardingPageHeight = MediaQuery.of(context).size.height * 0.8.h;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
+      body: Column(
         children: [
           SizedBox(
             height: onboardingPageHeight,
@@ -41,31 +41,28 @@ class _OnboardingState extends State<Onboarding> {
                     imageAsset: Assets.imagesA1,
                     heading: "Free delivery offers",
                     description:
-                    "Free delivery for new customers via Apple Pay and others payment methods."),
+                        "Free delivery for new customers via Apple Pay and others payment methods."),
                 PageModel(
                     imageAsset: Assets.imagesA2,
                     heading: "Choose your food",
                     description:
-                    "Easily find your type of food craving and you’ll get delivery in wide range."),
+                        "Easily find your type of food craving and you’ll get delivery in wide range."),
               ],
             ),
           ),
-          Align(
-              alignment: Alignment(0.w, 0.25.h),
-              child: SmoothPageIndicator(
-                controller: pageController,
-                count: 3,
-                effect: const WormEffect(),
-              )),
-          Align(
-              alignment: Alignment(0.w, 0.35.h),
-              child: ReusableButton(const Text('GET STARTED'), () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        child: LoginPage(),
-                        type: PageTransitionType.rightToLeft));
-              }, kGreenColor)),
+          addVerticalSpacing(20),
+          SmoothPageIndicator(
+            controller: pageController,
+            count: 3,
+            effect: const WormEffect(),
+          ),
+          addVerticalSpacing(10),
+          ReusableButton(const Text('GET STARTED'), () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: LoginPage(), type: PageTransitionType.rightToLeft));
+          }, kGreenColor),
         ],
       ),
     );
