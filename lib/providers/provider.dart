@@ -1,26 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
 
 class FoodlyProvider extends ChangeNotifier {
-  String _location = '';
+  double _lat = 0.0;
+  double _long = 0.0;
+  String appId = '1e2c66dbb32db6e904786288b45ded3e';
 
-  String get location => _location;
+  double get lat => _lat;
 
-  set location(String value) {
-    _location = value;
-    notifyListeners();
-  }
+  double get long => _long;
 
-  Future<Position> determinePosition() async {
+  Future<void> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
       return Future.error('Location services are disabled.');
     }
 
@@ -28,25 +26,29 @@ class FoodlyProvider extends ChangeNotifier {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
         return Future.error('Location permissions are denied');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition(
+    final position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.low,
     );
+    _lat = position.latitude;
+    _long = position.longitude;
+    notifyListeners();
+  }
+
+  Future<String> getLocationName(double latitude, double longitude) async {
+    final url = Uri.parse(
+        'http://api.positionstack.com/v1/reverse?access_key=6a7674d0f66fec05fcb5dbc3d4f1af46&query=$latitude,$longitude');
+    final response = await http.get(url);
+    final decodedData = jsonDecode(response.body);
+    final locationName = decodedData['data'][0]['label'];
+    return locationName;
   }
 }

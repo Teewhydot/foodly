@@ -18,29 +18,14 @@ class PageModel extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Expanded(
-          flex: 3,
-          child: Column(
-            children: [
-              addVerticalSpacing(40),
-              Expanded(
-                flex: 4,
-                child: SizedBox(
-                    height: 300.h,
-                    width: 300.w,
-                    child: Image.asset(imageAsset)),
-              ),
-              Expanded(child: Text(heading, style: kBoldTextStyle)),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    description,
-                    style: kDescTextStyle,
-                  ),
-                ),
-              ),
-            ],
+        addVerticalSpacing(20),
+        SizedBox(height: 200.h, width: 200.w, child: Image.asset(imageAsset)),
+        Text(heading, style: kBoldTextStyle),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            description,
+            style: kDescTextStyle,
           ),
         ),
       ],

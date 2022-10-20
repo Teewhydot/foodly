@@ -7,7 +7,6 @@ import 'package:foodly/providers/provider.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
 import 'package:foodly/screens/mainscreen.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -93,8 +92,7 @@ class _LocationState extends State<Location> {
                     ],
                   ), () async {
                 startSpinning();
-                final Position position = await provider.determinePosition();
-                print(position);
+                await provider.determinePosition();
                 Navigator.push(
                     context,
                     PageTransition(

@@ -4,15 +4,30 @@ import 'package:foodly/filter.dart';
 import 'package:foodly/generated/assets.dart';
 import 'package:foodly/models/featured_partners.dart';
 import 'package:foodly/models/restaurants.dart';
+import 'package:foodly/providers/provider.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/carousel_slider_widget.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final providerListen = Provider.of<FoodlyProvider>(context, listen: false);
+    final provider = Provider.of<FoodlyProvider>(context);
     List<FeaturedPartner> featuredPartners = [
       FeaturedPartner(
         image: Assets.imagesFp,
@@ -156,10 +171,11 @@ class HomePage extends StatelessWidget {
         title: Column(
           children: [
             Text('DELIVERY TO', style: kGreenText.copyWith(fontSize: 12.sp)),
-            const Text(
-              'California, USA',
-              style: kTitleTextStyle,
-            ),
+            FutureProvider(
+                create: (_) async => FoodlyProvider()
+                    .getLocationName(provider.lat, provider.long),
+                initialData: "Loading...",
+                child: const Text('Tee')),
           ],
         ),
         leading: IconButton(
