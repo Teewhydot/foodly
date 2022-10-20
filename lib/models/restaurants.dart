@@ -69,7 +69,13 @@ class RestaurantsWidget extends StatelessWidget {
               Navigator.push(
                   context,
                   PageTransition(
-                      child: const RestaurantDetails(),
+                      child: RestaurantDetails(
+                          restaurantDeliveryFee: deliveryFee,
+                          restaurantImage: image,
+                          restaurantName: name,
+                          restaurantRating: rating,
+                          restaurantTime: time,
+                          restaurantLocation: location),
                       type: PageTransitionType.rightToLeft));
             },
             child: Container(

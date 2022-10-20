@@ -8,7 +8,7 @@ class FeaturedPartner {
   final String image;
   final String name;
   final String location;
-  final String rating;
+  final double rating;
   final String time;
 
   FeaturedPartner({
@@ -24,7 +24,7 @@ class FeaturedPartnerWidget extends StatelessWidget {
   final String image;
   final String name;
   final String location;
-  final String rating;
+  final double rating;
   final String time;
   final String deliveryFee;
   final double width;
@@ -54,7 +54,14 @@ class FeaturedPartnerWidget extends StatelessWidget {
                 Navigator.push(
                     context,
                     PageTransition(
-                        child: const RestaurantDetails(),
+                        child: RestaurantDetails(
+                          restaurantDeliveryFee: deliveryFee,
+                          restaurantImage: image,
+                          restaurantName: name,
+                          restaurantLocation: location,
+                          restaurantTime: time,
+                          restaurantRating: rating,
+                        ),
                         type: PageTransitionType.rightToLeft));
               },
               child: Container(
@@ -88,7 +95,7 @@ class FeaturedPartnerWidget extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          rating,
+                          rating.toString(),
                           style: kDescTextStyle.copyWith(
                               color: kWhiteColor, fontSize: 12.sp),
                         ),

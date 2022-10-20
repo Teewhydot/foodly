@@ -32,6 +32,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/onboarding_images/
     - assets/search_images/
     - assets/search_results/
 flutter_native_splash:

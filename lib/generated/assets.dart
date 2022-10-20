@@ -2,9 +2,6 @@
 class Assets {
   Assets._();
 
-  static const String imagesA1 = 'assets/images/a1.png';
-  static const String imagesA2 = 'assets/images/a2.png';
-  static const String imagesA3 = 'assets/images/a3.png';
   static const String imagesArmImage = 'assets/images/armImage.png';
   static const String imagesEmptycardslistimage =
       'assets/images/emptycardslistimage.png';
@@ -30,6 +27,12 @@ class Assets {
   static const String imagesTime = 'assets/images/time.png';
   static const String imagesTimer = 'assets/images/timer.png';
   static const String imagesVisa = 'assets/images/visa.png';
+  static const String onboardingImagesA1 =
+      'assets/images/onboarding_images/a1.png';
+  static const String onboardingImagesA2 =
+      'assets/images/onboarding_images/a2.png';
+  static const String onboardingImagesA3 =
+      'assets/images/onboarding_images/a3.png';
   static const String searchImagesFilter1 = 'assets/search_images/filter1.png';
   static const String searchImagesFilter2 = 'assets/search_images/filter2.png';
   static const String searchImagesFilter3 = 'assets/search_images/filter3.png';

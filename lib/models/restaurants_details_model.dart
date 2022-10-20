@@ -9,7 +9,22 @@ import 'package:foodly/reusables/widgets/carousel_slider_widget.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
 
 class RestaurantDetails extends StatelessWidget {
-  const RestaurantDetails({Key? key}) : super(key: key);
+  final String restaurantName;
+  final String restaurantImage;
+  final String restaurantLocation;
+  final double restaurantRating;
+  final String restaurantTime;
+  final String restaurantDeliveryFee;
+
+  const RestaurantDetails({
+    Key? key,
+    required this.restaurantName,
+    required this.restaurantImage,
+    required this.restaurantLocation,
+    required this.restaurantRating,
+    required this.restaurantTime,
+    required this.restaurantDeliveryFee,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,42 +49,21 @@ class RestaurantDetails extends StatelessWidget {
         image: Assets.imagesFp,
         name: "The Coffee Bean & Tea Leaf",
         location: "Kampala, Uganda",
-        rating: "4.5",
+        rating: 4.5,
         time: "30-40 min",
       ),
       FeaturedPartner(
         image: Assets.imagesFp,
         name: "The Coffee Bean & Tea Leaf",
         location: "Kampala, Uganda",
-        rating: "4.5",
+        rating: 4.5,
         time: "30-40 min",
       ),
       FeaturedPartner(
         image: Assets.imagesFp,
         name: "The Coffee Bean & Tea Leaf",
         location: "Kampala, Uganda",
-        rating: "4.5",
-        time: "30-40 min",
-      ),
-      FeaturedPartner(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: "4.5",
-        time: "30-40 min",
-      ),
-      FeaturedPartner(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: "4.5",
-        time: "30-40 min",
-      ),
-      FeaturedPartner(
-        image: Assets.imagesFp,
-        name: "The Coffee Bean & Tea Leaf",
-        location: "Kampala, Uganda",
-        rating: "4.5",
+        rating: 4.5,
         time: "30-40 min",
       ),
     ];
@@ -80,7 +74,31 @@ class RestaurantDetails extends StatelessWidget {
         builder: (context, constraints) => ListView(
           scrollDirection: Axis.vertical,
           children: [
-            RestaurantDetail(featuredPartners: featuredPartners),
+            SizedBox(
+              height: 280.h,
+              child: Stack(
+                children: [
+                  CustomCarouselWidget(
+                    restaurantImage,
+                    restaurantImage,
+                    restaurantImage,
+                  ),
+                  Align(
+                    alignment: const Alignment(-0.99, -0.99),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            addVerticalSpacing(10),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Column(
@@ -88,7 +106,7 @@ class RestaurantDetails extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'Mac Donalds',
+                        restaurantName,
                         style: kBoldTextStyle.copyWith(
                           color: Colors.black,
                         ),
@@ -107,7 +125,7 @@ class RestaurantDetails extends StatelessWidget {
                   addVerticalSpacing(10),
                   Row(
                     children: [
-                      const Text('4.5', style: kTitleTextStyle),
+                      Text(restaurantRating.toString(), style: kTitleTextStyle),
                       addHorizontalSpacing(5),
                       const Icon(
                         Icons.star,
@@ -127,7 +145,7 @@ class RestaurantDetails extends StatelessWidget {
                           size: 20,
                         ),
                         addHorizontalSpacing(5),
-                        const Text('Free Delivery'),
+                        Text(restaurantDeliveryFee),
                         addHorizontalSpacing(5),
                         const Icon(
                           FontAwesomeIcons.alignRight,
@@ -135,7 +153,7 @@ class RestaurantDetails extends StatelessWidget {
                           size: 20,
                         ),
                         addHorizontalSpacing(5),
-                        const Text('25 min '),
+                        Text(restaurantDeliveryFee),
                       ],
                     ),
                     SizedBox(
@@ -256,48 +274,6 @@ class RestaurantDetails extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class RestaurantDetail extends StatefulWidget {
-  const RestaurantDetail({
-    Key? key,
-    required this.featuredPartners,
-  }) : super(key: key);
-
-  final List<FeaturedPartner> featuredPartners;
-
-  @override
-  State<RestaurantDetail> createState() => _RestaurantDetailState();
-}
-
-class _RestaurantDetailState extends State<RestaurantDetail> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 280.h,
-      child: Stack(
-        children: [
-          const CustomCarouselWidget(
-            Assets.imagesArmImage,
-            Assets.imagesArmImage,
-            Assets.imagesArmImage,
-          ),
-          Align(
-            alignment: const Alignment(-0.99, -0.99),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
