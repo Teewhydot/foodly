@@ -8,8 +8,11 @@ class FoodlyProvider extends ChangeNotifier {
   double _lat = 0.0;
   double _long = 0.0;
   String appId = '1e2c66dbb32db6e904786288b45ded3e';
+  String locationName = '';
 
   double get lat => _lat;
+
+  String get location => locationName;
 
   double get long => _long;
 
@@ -43,12 +46,12 @@ class FoodlyProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String> getLocationName(double latitude, double longitude) async {
+  void getLocationName() async {
     final url = Uri.parse(
-        'http://api.positionstack.com/v1/reverse?access_key=6a7674d0f66fec05fcb5dbc3d4f1af46&query=$latitude,$longitude');
+        'http://api.positionstack.com/v1/reverse?access_key=6a7674d0f66fec05fcb5dbc3d4f1af46&query=$lat,$long');
     final response = await http.get(url);
     final decodedData = jsonDecode(response.body);
-    final locationName = decodedData['data'][0]['label'];
-    return locationName;
+    locationName = decodedData['data'][0]['label'];
+    notifyListeners();
   }
 }

@@ -18,15 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final providerListen = Provider.of<FoodlyProvider>(context, listen: false);
     final provider = Provider.of<FoodlyProvider>(context);
     List<FeaturedPartner> featuredPartners = [
       FeaturedPartner(
@@ -171,11 +165,9 @@ class _HomePageState extends State<HomePage> {
         title: Column(
           children: [
             Text('DELIVERY TO', style: kGreenText.copyWith(fontSize: 12.sp)),
-            FutureProvider(
-                create: (_) async => FoodlyProvider()
-                    .getLocationName(provider.lat, provider.long),
-                initialData: "Loading...",
-                child: const Text('Tee')),
+            addVerticalSpacing(3),
+            Text(provider.location,
+                style: kBlackText.copyWith(fontSize: 16.sp)),
           ],
         ),
         leading: IconButton(
