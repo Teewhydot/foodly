@@ -19,59 +19,77 @@ class FoodlyProvider extends ChangeNotifier {
   double get long => _long;
 
   Future<void> determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+    try {
+      bool serviceEnabled;
+      LocationPermission permission;
 
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        return Future.error('Location services are disabled.');
       }
-    }
 
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          return Future.error('Location permissions are denied');
+        }
+      }
 
-    final position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.low,
-    );
-    _lat = position.latitude;
-    _long = position.longitude;
-    notifyListeners();
+      if (permission == LocationPermission.deniedForever) {
+        return Future.error(
+            'Location permissions are permanently denied, we cannot request permissions.');
+      }
+      print('Permission accepted');
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low,
+      );
+      print('Location determined');
+      _lat = position.latitude;
+      _long = position.longitude;
+      print(_lat);
+      print(_long);
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
   }
 
-  void getLocationName() async {
+  Future getLocationName() async {
     final url = Uri.parse(
         'http://api.positionstack.com/v1/reverse?access_key=6a7674d0f66fec05fcb5dbc3d4f1af46&query=$lat,$long');
     final response = await http.get(url);
-    final decodedData = jsonDecode(response.body);
-    locationName = decodedData['data'][0]['label'];
+    if (response.statusCode == 200) {
+      final decodedData = jsonDecode(response.body);
+      locationName = decodedData['data'][0]['label'];
+    } else {
+      print(response.statusCode);
+    }
     notifyListeners();
   }
 }
 
 class CredentialsSignInProvider extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
-  late User loggedInUser;
 
-  User get authenticatedUser => loggedInUser;
-
-  Future login(String email, password) async {
-    await _auth.signInWithEmailAndPassword(email: email, password: password);
-    notifyListeners();
+  Future<UserCredential?> signUp(String email, password) async {
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      return newUser;
+    } catch (e) {
+      return null;
+    }
   }
 
-  void getCurrentLoggedInUser() async {
-    loggedInUser = _auth.currentUser!;
-    notifyListeners();
+  Future<UserCredential?> login(String email, password) async {
+    try {
+      final loggedInUser = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return loggedInUser;
+    } catch (e) {
+      return null;
+    }
   }
 }
 

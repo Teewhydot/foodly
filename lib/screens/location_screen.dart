@@ -93,7 +93,7 @@ class _LocationState extends State<Location> {
                   ), () async {
                 startSpinning();
                 await provider.determinePosition();
-                provider.getLocationName();
+                await provider.getLocationName();
                 Navigator.push(
                     context,
                     PageTransition(
