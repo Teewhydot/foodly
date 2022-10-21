@@ -74,7 +74,7 @@ class _OnboardingState extends State<Onboarding> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: LoginPage(),
+                          child: const LoginPage(),
                           type: PageTransitionType.rightToLeft));
                 }, kGreenColor),
                 addVerticalSpacing(10),

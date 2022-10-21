@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 class FoodlyProvider extends ChangeNotifier {
@@ -52,6 +54,43 @@ class FoodlyProvider extends ChangeNotifier {
     final response = await http.get(url);
     final decodedData = jsonDecode(response.body);
     locationName = decodedData['data'][0]['label'];
+    notifyListeners();
+  }
+}
+
+class CredentialsSignInProvider extends ChangeNotifier {
+  final _auth = FirebaseAuth.instance;
+  late User loggedInUser;
+
+  User get authenticatedUser => loggedInUser;
+
+  Future login(String email, password) async {
+    await _auth.signInWithEmailAndPassword(email: email, password: password);
+    notifyListeners();
+  }
+
+  void getCurrentLoggedInUser() async {
+    loggedInUser = _auth.currentUser!;
+    notifyListeners();
+  }
+}
+
+class GoogleSignInProvider extends ChangeNotifier {
+  final googleSignIn = GoogleSignIn();
+  GoogleSignInAccount? user;
+
+  GoogleSignInAccount get currentUser => user!;
+
+  Future login() async {
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) return;
+    user = googleUser;
+    final googleAuth = await googleUser.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    await FirebaseAuth.instance.signInWithCredential(credential);
     notifyListeners();
   }
 }

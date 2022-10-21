@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/reusables/constants.dart';
-import 'package:foodly/reusables/widgets/custom_text_field.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/reusables/widgets/validators.dart';
 import 'package:foodly/screens/authentication/reset_email_success.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -57,10 +57,46 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             addVerticalSpacing(34),
             Column(
               children: [
-                CustomTextField(
-                  controller: _emailController,
-                  hintText: 'Email',
-                  suffixIcon: Icons.email,
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 70,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20.r))),
+                  child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: _emailController,
+                    validator: emailValidator,
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (newValue) {},
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: textFieldFillColor,
+                      focusColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: kGreenColor,
+                            width: 3,
+                            style: BorderStyle.solid),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      suffixIcon: Padding(
+                        padding: EdgeInsets.all(8.0.r),
+                        child: GestureDetector(
+                            onTap: () async {}, child: const Icon(Icons.email)),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1,
+                            style: BorderStyle.solid,
+                            color: kGreenColor.withOpacity(0.5)),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      hintText: 'Email',
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 5.0.h, horizontal: 20.0.w),
+                    ),
+                  ),
                 ),
                 addVerticalSpacing(14),
                 ReusableButton(const Text('RESET PASSWORD'), () {

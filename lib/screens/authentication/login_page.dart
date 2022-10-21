@@ -2,23 +2,34 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:foodly/providers/provider.dart';
 import 'package:foodly/reusables/constants.dart';
-import 'package:foodly/reusables/widgets/custom_text_field.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
+import 'package:foodly/reusables/widgets/validators.dart';
 import 'package:foodly/screens/authentication/forgot_pasword.dart';
 import 'package:foodly/screens/authentication/signup_page.dart';
 import 'package:foodly/screens/location_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final providerListen =
+        Provider.of<CredentialsSignInProvider>(context, listen: false);
+    final providerListen1 =
+        Provider.of<GoogleSignInProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: kWhiteColor,
@@ -43,7 +54,7 @@ class LoginPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(left: 20.0.w, right: 20.0.w),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             addVerticalSpacing(24),
             const Text(
@@ -55,14 +66,14 @@ class LoginPage extends StatelessWidget {
                 text: TextSpan(
               text: 'Enter your Phone number or Email for sign in, Or ',
               style: kDescTextStyle,
-              children: [
-                TextSpan(
-                  text: ' Create account',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
+                  children: [
+                    TextSpan(
+                      text: ' Create account',
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
                               child: const SignUpPage(),
                               type: PageTransitionType.rightToLeft));
                     },
@@ -73,81 +84,162 @@ class LoginPage extends StatelessWidget {
               ],
             )),
             addVerticalSpacing(34),
-            Column(
-              children: [
-                CustomTextField(
-                  controller: _emailController,
-                  hintText: 'Email',
-                  suffixIcon: Icons.email,
-                ),
-                addVerticalSpacing(14),
-                CustomTextField(
-                  controller: _passwordController,
-                  hintText: 'Password',
-                  suffixIcon: Icons.lock,
-                ),
-                addVerticalSpacing(20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                child: const ForgotPasswordPage(),
-                                type: PageTransitionType.rightToLeft));
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: kDescTextStyle.copyWith(
-                          fontSize: 12.sp,
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20.r))),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _emailController,
+                      validator: emailValidator,
+                      cursorColor: Colors.black,
+                      keyboardType: TextInputType.emailAddress,
+                      onChanged: (newValue) {},
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: textFieldFillColor,
+                        focusColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: kGreenColor,
+                              width: 3,
+                              style: BorderStyle.solid),
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.all(8.0.r),
+                          child: GestureDetector(
+                              onTap: () async {},
+                              child: const Icon(Icons.email)),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 1,
+                              style: BorderStyle.solid,
+                              color: kGreenColor.withOpacity(0.5)),
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        hintText: 'Email',
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 5.0.h, horizontal: 20.0.w),
                       ),
                     ),
-                  ],
-                ),
-                ReusableButton(const Text('SIGN IN'), () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          child: const Location(),
-                          type: PageTransitionType.rightToLeft));
-                }, kGreenColor),
-                addVerticalSpacing(20),
-                Text(
-                  'Or',
-                  style: kDescTextStyle,
-                ),
-                addVerticalSpacing(20),
-                Column(
-                  children: [
-                    ReusableButton(
-                        Row(children: [
-                          const Icon(
-                            FontAwesomeIcons.facebook,
-                            color: Colors.white,
+                  ),
+                  addVerticalSpacing(24),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20.r))),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _passwordController,
+                      validator: passwordValidator,
+                      cursorColor: Colors.black,
+                      keyboardType: TextInputType.visiblePassword,
+                      onChanged: (newValue) {},
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: textFieldFillColor,
+                        focusColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: kGreenColor,
+                              width: 3,
+                              style: BorderStyle.solid),
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.all(8.0.r),
+                          child: GestureDetector(
+                              onTap: () async {},
+                              child: const Icon(Icons.lock)),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 1,
+                              style: BorderStyle.solid,
+                              color: kGreenColor.withOpacity(0.5)),
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        hintText: 'Password',
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0.h, horizontal: 20.0.w),
+                      ),
+                    ),
+                  ),
+                  addVerticalSpacing(24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  child: const ForgotPasswordPage(),
+                                  type: PageTransitionType.rightToLeft));
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: kDescTextStyle.copyWith(
+                            fontSize: 12.sp,
                           ),
-                          addHorizontalSpacing(30),
-                          const Center(child: Text('CONNECT WITH FACEBOOK'))
-                        ]),
-                        () {},
-                        kDeepBlueColor),
-                    addVerticalSpacing(20),
-                    ReusableButton(
-                        Row(children: [
-                          const Icon(
-                            FontAwesomeIcons.google,
-                            color: Colors.white,
-                          ),
-                          addHorizontalSpacing(30),
-                          const Center(child: Text('CONNECT WITH GOOGLE'))
-                        ]),
-                        () {},
-                        kBlueColor),
-                  ],
-                )
-              ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  ReusableButton(const Text('SIGN IN'), () async {
+                    if (_formKey.currentState!.validate()) {
+                      await providerListen.login(
+                          _emailController.text, _passwordController.text);
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              child: const Location(),
+                              type: PageTransitionType.rightToLeft));
+                    }
+                  }, kGreenColor),
+                  addVerticalSpacing(20),
+                  Text(
+                    'Or',
+                    style: kDescTextStyle,
+                  ),
+                  addVerticalSpacing(20),
+                  Column(
+                    children: [
+                      ReusableButton(
+                          Row(children: [
+                            const Icon(
+                              FontAwesomeIcons.facebook,
+                              color: Colors.white,
+                            ),
+                            addHorizontalSpacing(30),
+                            const Center(child: Text('CONNECT WITH FACEBOOK'))
+                          ]),
+                          () {},
+                          kDeepBlueColor),
+                      addVerticalSpacing(20),
+                      ReusableButton(
+                          Row(children: [
+                            const Icon(
+                              FontAwesomeIcons.google,
+                              color: Colors.white,
+                            ),
+                            addHorizontalSpacing(30),
+                            const Center(child: Text('CONNECT WITH GOOGLE'))
+                          ]), () async {
+                        providerListen1.login();
+                      }, kBlueColor),
+                    ],
+                  )
+                ],
+              ),
             ),
           ],
         ),
