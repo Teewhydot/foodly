@@ -11,6 +11,7 @@ import 'package:foodly/reusables/widgets/validators.dart';
 import 'package:foodly/screens/authentication/forgot_pasword.dart';
 import 'package:foodly/screens/authentication/signup_page.dart';
 import 'package:foodly/screens/location_screen.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool hasInternet;
     final providerListen =
         Provider.of<CredentialsSignInProvider>(context, listen: false);
     final providerListen1 =
@@ -85,25 +87,25 @@ class _LoginPageState extends State<LoginPage> {
               addVerticalSpacing(20),
               RichText(
                   text: TextSpan(
-                text: 'Enter your Phone number or Email for sign in, Or ',
-                style: kDescTextStyle,
-                children: [
-                  TextSpan(
-                    text: ' Create account',
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                child: const SignUpPage(),
-                                type: PageTransitionType.rightToLeft));
-                      },
-                    style: kTitleTextStyle.copyWith(
-                      color: kGreenColor,
-                    ),
-                  ),
-                ],
-              )),
+                    text: 'Enter your Phone number or Email for sign in, Or ',
+                    style: kDescTextStyle,
+                    children: [
+                      TextSpan(
+                        text: ' Create account',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: const SignUpPage(),
+                                    type: PageTransitionType.rightToLeft));
+                          },
+                        style: kTitleTextStyle.copyWith(
+                          color: kGreenColor,
+                        ),
+                      ),
+                    ],
+                  )),
               addVerticalSpacing(34),
               Form(
                 key: _formKey,
@@ -114,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 70,
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(20.r))),
+                          BorderRadius.all(Radius.circular(20.r))),
                       child: TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: _emailController,
@@ -158,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 70,
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(20.r))),
+                          BorderRadius.all(Radius.circular(20.r))),
                       child: TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: _passwordController,
@@ -218,26 +220,36 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     ReusableButton(const Text('SIGN IN'), () async {
-                      if (_formKey.currentState!.validate()) {
-                        startSpinning();
-                        final loggedInUser = await providerListen.login(
-                            _emailController.text, _passwordController.text);
+                      hasInternet =
+                          await InternetConnectionChecker().hasConnection;
+                      if (hasInternet) {
+                        if (_formKey.currentState!.validate()) {
+                          startSpinning();
+                          final loggedInUser = await providerListen.login(
+                              _emailController.text, _passwordController.text);
 
-                        if (loggedInUser != null) {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: const Location(),
-                                  type: PageTransitionType.rightToLeft));
-                          stopSpinning();
-                        } else {
-                          stopSpinning();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Invalid Credentials'),
-                            ),
-                          );
+                          if (loggedInUser != null) {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: const Location(),
+                                    type: PageTransitionType.rightToLeft));
+                            stopSpinning();
+                          } else {
+                            stopSpinning();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Invalid Credentials'),
+                              ),
+                            );
+                          }
                         }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('No Internet Connection'),
+                          ),
+                        );
                       }
                     }, kGreenColor),
                     addVerticalSpacing(20),
@@ -257,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
                               addHorizontalSpacing(30),
                               const Center(child: Text('CONNECT WITH FACEBOOK'))
                             ]),
-                            () {},
+                                () {},
                             kDeepBlueColor),
                         addVerticalSpacing(20),
                         ReusableButton(
@@ -269,17 +281,29 @@ class _LoginPageState extends State<LoginPage> {
                               addHorizontalSpacing(30),
                               const Center(child: Text('CONNECT WITH GOOGLE'))
                             ]), () async {
-                          final newLoggedInUser = await providerListen1.login();
-                          if (newLoggedInUser != null) {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    child: const Location(),
-                                    type: PageTransitionType.rightToLeft));
+                          final hasInternet =
+                              await InternetConnectionChecker().hasConnection;
+
+                          if (hasInternet) {
+                            final newLoggedInUser =
+                                await providerListen1.login();
+                            if (newLoggedInUser != null) {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: const Location(),
+                                      type: PageTransitionType.rightToLeft));
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Login Failed'),
+                                ),
+                              );
+                            }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Login Failed'),
+                                content: Text('No Internet Connection'),
                               ),
                             );
                           }

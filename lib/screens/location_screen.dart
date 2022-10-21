@@ -7,6 +7,7 @@ import 'package:foodly/providers/provider.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
 import 'package:foodly/screens/mainscreen.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,7 @@ class _LocationState extends State<Location> {
 
   @override
   Widget build(BuildContext context) {
+    bool hasInternet;
     final provider = Provider.of<FoodlyProvider>(context, listen: false);
     return ModalProgressHUD(
       progressIndicator: const CircularProgressIndicator(
@@ -91,15 +93,23 @@ class _LocationState extends State<Location> {
                       ),
                     ],
                   ), () async {
-                startSpinning();
-                await provider.determinePosition();
-                await provider.getLocationName();
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        child: const MainScreen(),
-                        type: PageTransitionType.rightToLeft));
-                stopSpinning();
+                hasInternet = await InternetConnectionChecker().hasConnection;
+
+                if (hasInternet) {
+                  startSpinning();
+                  await provider.determinePosition();
+                  await provider.getLocationName();
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const MainScreen(),
+                          type: PageTransitionType.rightToLeft));
+                  stopSpinning();
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('No internet connection'),
+                  ));
+                }
               }, kWhiteColor),
             ],
           ),
