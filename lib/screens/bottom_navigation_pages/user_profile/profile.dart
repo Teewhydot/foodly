@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodly/generated/assets.dart';
+import 'package:foodly/providers/provider.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/custom_listtile.dart';
 import 'package:foodly/screens/add_social_media_screen.dart';
+import 'package:foodly/screens/authentication/login_page.dart';
 import 'package:foodly/screens/cards_screens/cards_page.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 import 'change_password.dart';
 import 'profile_page.dart';
@@ -14,6 +17,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: kWhiteColor,
       body: Padding(
@@ -73,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                 leading: const Icon(Icons.facebook),
                 heading: const Text('Add social media accounts'),
                 subHeading:
-                    const Text('Connect your facebook, twitter , github etc'),
+                const Text('Connect your facebook, twitter , github etc'),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -117,7 +121,13 @@ class ProfilePage extends StatelessWidget {
                 leading: const Icon(Icons.logout),
                 heading: const Text('Log Out'),
                 subHeading: const Text(''),
-                onTap: () {}),
+                onTap: () async {
+                  await provider.logOut();
+                  Navigator.pushReplacement(
+                      (context),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()));
+                }),
           ],
         ),
       ),

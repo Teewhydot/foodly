@@ -2,6 +2,7 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodly/providers/provider.dart';
@@ -43,11 +44,14 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    AccessToken? _accessToken;
     bool hasInternet;
-    final providerListen =
+    final credentialsSignInProvider =
         Provider.of<CredentialsSignInProvider>(context, listen: false);
-    final providerListen1 =
+    final googleSignInProvider =
         Provider.of<GoogleSignInProvider>(context, listen: false);
+    final faceBookLoginProvider =
+        Provider.of<FacebookSignInProvider>(context, listen: false);
     return ModalProgressHUD(
       progressIndicator: const CircularProgressIndicator(
         color: kGreenColor,
@@ -87,25 +91,25 @@ class _LoginPageState extends State<LoginPage> {
               addVerticalSpacing(20),
               RichText(
                   text: TextSpan(
-                    text: 'Enter your Phone number or Email for sign in, Or ',
-                    style: kDescTextStyle,
-                    children: [
-                      TextSpan(
-                        text: ' Create account',
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    child: const SignUpPage(),
-                                    type: PageTransitionType.rightToLeft));
-                          },
-                        style: kTitleTextStyle.copyWith(
-                          color: kGreenColor,
-                        ),
-                      ),
-                    ],
-                  )),
+                text: 'Enter your Phone number or Email for sign in, Or ',
+                style: kDescTextStyle,
+                children: [
+                  TextSpan(
+                    text: ' Create account',
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                child: const SignUpPage(),
+                                type: PageTransitionType.rightToLeft));
+                      },
+                    style: kTitleTextStyle.copyWith(
+                      color: kGreenColor,
+                    ),
+                  ),
+                ],
+              )),
               addVerticalSpacing(34),
               Form(
                 key: _formKey,
@@ -116,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 70,
                       decoration: BoxDecoration(
                           borderRadius:
-                          BorderRadius.all(Radius.circular(20.r))),
+                              BorderRadius.all(Radius.circular(20.r))),
                       child: TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: _emailController,
@@ -160,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 70,
                       decoration: BoxDecoration(
                           borderRadius:
-                          BorderRadius.all(Radius.circular(20.r))),
+                              BorderRadius.all(Radius.circular(20.r))),
                       child: TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: _passwordController,
@@ -221,12 +225,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     ReusableButton(const Text('SIGN IN'), () async {
                       hasInternet =
-                          await InternetConnectionChecker().hasConnection;
+                      await InternetConnectionChecker().hasConnection;
                       if (hasInternet) {
                         if (_formKey.currentState!.validate()) {
                           startSpinning();
-                          final loggedInUser = await providerListen.login(
-                              _emailController.text, _passwordController.text);
+                          final loggedInUser =
+                              await credentialsSignInProvider.login(
+                                  _emailController.text,
+                                  _passwordController.text);
 
                           if (loggedInUser != null) {
                             Navigator.push(
@@ -268,9 +274,24 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               addHorizontalSpacing(30),
                               const Center(child: Text('CONNECT WITH FACEBOOK'))
-                            ]),
-                                () {},
-                            kDeepBlueColor),
+                            ]), () async {
+                          _accessToken =
+                              await faceBookLoginProvider.facebookLogin();
+                          await faceBookLoginProvider.getUserFacebookData();
+                          if (_accessToken != null) {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: const Location(),
+                                    type: PageTransitionType.rightToLeft));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Invalid Credentials'),
+                              ),
+                            );
+                          }
+                        }, kDeepBlueColor),
                         addVerticalSpacing(20),
                         ReusableButton(
                             Row(children: [
@@ -282,11 +303,11 @@ class _LoginPageState extends State<LoginPage> {
                               const Center(child: Text('CONNECT WITH GOOGLE'))
                             ]), () async {
                           final hasInternet =
-                              await InternetConnectionChecker().hasConnection;
+                          await InternetConnectionChecker().hasConnection;
 
                           if (hasInternet) {
                             final newLoggedInUser =
-                                await providerListen1.login();
+                                await googleSignInProvider.login();
                             if (newLoggedInUser != null) {
                               Navigator.push(
                                   context,

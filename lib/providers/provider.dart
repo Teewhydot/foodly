@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
@@ -40,18 +41,14 @@ class FoodlyProvider extends ChangeNotifier {
         return Future.error(
             'Location permissions are permanently denied, we cannot request permissions.');
       }
-      print('Permission accepted');
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low,
       );
-      print('Location determined');
       _lat = position.latitude;
       _long = position.longitude;
-      print(_lat);
-      print(_long);
       notifyListeners();
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -62,9 +59,7 @@ class FoodlyProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       final decodedData = jsonDecode(response.body);
       locationName = decodedData['data'][0]['label'];
-    } else {
-      print(response.statusCode);
-    }
+    } else {}
     notifyListeners();
   }
 }
@@ -110,5 +105,41 @@ class GoogleSignInProvider extends ChangeNotifier {
     );
     await FirebaseAuth.instance.signInWithCredential(credential);
     notifyListeners();
+  }
+
+  Future logOut() async {
+    FirebaseAuth.instance.signOut();
+  }
+}
+
+class FacebookSignInProvider extends ChangeNotifier {
+  String email = '';
+  String name = '';
+
+  String get getEmail => email;
+
+  String get getName => name;
+
+  Future<AccessToken> facebookLogin() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+
+    if (result.status == LoginStatus.success) {
+      final AccessToken accessToken = result.accessToken!;
+
+      return accessToken;
+    } else {
+      throw Exception('Facebook login failed');
+    }
+  }
+
+  Future<void> getUserFacebookData() async {
+    final userData = await FacebookAuth.i.getUserData();
+    email = userData['email'];
+    name = userData['name'];
+    notifyListeners();
+  }
+
+  Future logOut() async {
+    await FacebookAuth.instance.logOut();
   }
 }

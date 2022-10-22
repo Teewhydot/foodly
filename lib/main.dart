@@ -19,6 +19,9 @@ void main() async {
       ChangeNotifierProvider(create: (context) {
         return GoogleSignInProvider();
       }),
+      ChangeNotifierProvider(create: (context) {
+        return FacebookSignInProvider();
+      }),
     ],
     builder: (context, _) {
       return const MyApp();
