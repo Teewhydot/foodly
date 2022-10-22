@@ -1,8 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodly/providers/provider.dart';
@@ -45,9 +46,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final providerListen =
+    AccessToken? _accessToken;
+    final faceBookLoginProvider =
+        Provider.of<FacebookSignInProvider>(context, listen: false);
+    final credentialsSignInProvider =
         Provider.of<CredentialsSignInProvider>(context, listen: false);
-    final providerListen1 =
+    final googleSignInProvider =
         Provider.of<GoogleSignInProvider>(context, listen: false);
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
@@ -274,7 +278,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ReusableButton(const Text('SIGN UP'), () async {
                       if (_formKey.currentState!.validate()) {
                         startSpinning();
-                        final newUser = await providerListen.signUp(
+                        final newUser = await credentialsSignInProvider.signUp(
                             emailController.text, passwordController.text);
                         if (newUser != null) {
                           Navigator.push(
@@ -306,9 +310,24 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               addHorizontalSpacing(30),
                               const Center(child: Text('CONNECT WITH FACEBOOK'))
-                            ]),
-                            () {},
-                            kDeepBlueColor),
+                            ]), () async {
+                          _accessToken =
+                              await faceBookLoginProvider.facebookLogin();
+                          await faceBookLoginProvider.getUserFacebookData();
+                          if (_accessToken != null) {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: const Location(),
+                                    type: PageTransitionType.rightToLeft));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Login Failed'),
+                              ),
+                            );
+                          }
+                        }, kDeepBlueColor),
                         addVerticalSpacing(20),
                         ReusableButton(
                             Row(children: [
@@ -319,7 +338,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               addHorizontalSpacing(30),
                               const Center(child: Text('CONNECT WITH GOOGLE'))
                             ]), () async {
-                          await providerListen1.login();
+                          await googleSignInProvider.login();
                           Navigator.push(
                               context,
                               PageTransition(
