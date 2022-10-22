@@ -225,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     ReusableButton(const Text('SIGN IN'), () async {
                       hasInternet =
-                      await InternetConnectionChecker().hasConnection;
+                          await InternetConnectionChecker().hasConnection;
                       if (hasInternet) {
                         if (_formKey.currentState!.validate()) {
                           startSpinning();
@@ -287,7 +287,7 @@ class _LoginPageState extends State<LoginPage> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Invalid Credentials'),
+                                content: Text('Login Failed'),
                               ),
                             );
                           }
@@ -303,7 +303,7 @@ class _LoginPageState extends State<LoginPage> {
                               const Center(child: Text('CONNECT WITH GOOGLE'))
                             ]), () async {
                           final hasInternet =
-                          await InternetConnectionChecker().hasConnection;
+                              await InternetConnectionChecker().hasConnection;
 
                           if (hasInternet) {
                             final newLoggedInUser =
