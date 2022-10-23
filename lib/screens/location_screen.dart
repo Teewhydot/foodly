@@ -20,6 +20,7 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
+  final TextEditingController addressController = TextEditingController();
   bool showSpinner = false;
 
   void startSpinning() {
@@ -111,6 +112,68 @@ class _LocationState extends State<Location> {
                   ));
                 }
               }, kWhiteColor),
+              addVerticalSpacing(50),
+              Text(
+                  'Note: If your current location does not have a designated latitude and longitude values, the loading screen will not stop, In that case enter your address manually below.',
+                  style: kDescTextStyle),
+              addVerticalSpacing(20),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 70,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.r))),
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: addressController,
+                  cursorColor: Colors.black,
+                  keyboardType: TextInputType.streetAddress,
+                  onChanged: (newValue) {},
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: textFieldFillColor,
+                    focusColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: kGreenColor,
+                          width: 3,
+                          style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1,
+                          style: BorderStyle.solid,
+                          color: kGreenColor.withOpacity(0.5)),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    hintText: 'Enter address manually',
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: 5.0.h, horizontal: 20.0.w),
+                  ),
+                ),
+              ),
+              addVerticalSpacing(20),
+              LocationButton(
+                  const Text(
+                    'Set Location',
+                    style: whiteText,
+                  ), () async {
+                hasInternet = await InternetConnectionChecker().hasConnection;
+                if (hasInternet) {
+                  startSpinning();
+                  provider.setLocation(addressController.text);
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const MainScreen(),
+                          type: PageTransitionType.rightToLeft));
+                  stopSpinning();
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('No internet connection'),
+                  ));
+                }
+              }, kGreenColor),
             ],
           ),
         ),

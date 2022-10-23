@@ -77,7 +77,7 @@ class _OnboardingState extends State<Onboarding> {
                           child: const LoginPage(),
                           type: PageTransitionType.rightToLeft));
                 }, kGreenColor),
-                addVerticalSpacing(10),
+                addVerticalSpacing(90),
               ],
             ),
           ),

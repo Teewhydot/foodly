@@ -28,17 +28,25 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
-  bool showSpinner = false;
+
+  // if the user signs in with credentials
+  bool isLoadingCredential = false;
+
+  // if the user signs in with facebook
+  bool isLoadingFacebook = false;
+
+  // if the user signs in with google
+  bool isLoadingGoogle = false;
 
   void startSpinning() {
     setState(() {
-      showSpinner = true;
+      isLoadingCredential = true;
     });
   }
 
   void stopSpinning() {
     setState(() {
-      showSpinner = false;
+      isLoadingCredential = true;
     });
   }
 
@@ -56,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
       progressIndicator: const CircularProgressIndicator(
         color: kGreenColor,
       ),
-      inAsyncCall: showSpinner,
+      inAsyncCall: isLoadingCredential,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: kWhiteColor,
@@ -223,7 +231,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                    ReusableButton(const Text('SIGN IN'), () async {
+                    ReusableButton(
+                        isLoadingCredential
+                            ? loadingIndicator
+                            : const Text('SIGN IN'), () async {
                       hasInternet =
                           await InternetConnectionChecker().hasConnection;
                       if (hasInternet) {
@@ -273,8 +284,14 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.white,
                               ),
                               addHorizontalSpacing(30),
-                              const Center(child: Text('CONNECT WITH FACEBOOK'))
+                              Center(
+                                  child: isLoadingFacebook
+                                      ? loadingIndicator
+                                      : const Text('SIGN IN WITH FACEBOOK')),
                             ]), () async {
+                          setState(() {
+                            isLoadingFacebook = true;
+                          });
                           _accessToken =
                               await faceBookLoginProvider.facebookLogin();
                           await faceBookLoginProvider.getUserFacebookData();
@@ -284,12 +301,19 @@ class _LoginPageState extends State<LoginPage> {
                                 PageTransition(
                                     child: const Location(),
                                     type: PageTransitionType.rightToLeft));
+
+                            setState(() {
+                              isLoadingFacebook = false;
+                            });
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Login Failed'),
                               ),
                             );
+                            setState(() {
+                              isLoadingFacebook = false;
+                            });
                           }
                         }, kDeepBlueColor),
                         addVerticalSpacing(20),
@@ -300,27 +324,37 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.white,
                               ),
                               addHorizontalSpacing(30),
-                              const Center(child: Text('CONNECT WITH GOOGLE'))
+                              Center(
+                                  child: isLoadingGoogle
+                                      ? loadingIndicator
+                                      : const Text('SIGN IN WITH GOOGLE')),
                             ]), () async {
                           final hasInternet =
                               await InternetConnectionChecker().hasConnection;
 
                           if (hasInternet) {
-                            final newLoggedInUser =
-                                await googleSignInProvider.login();
+                            setState(() {
+                              isLoadingGoogle = true;
+                            });
+                            await googleSignInProvider.login();
                             if (googleSignInProvider.currentUser != null) {
-                              print('login successful');
                               Navigator.push(
                                   context,
                                   PageTransition(
                                       child: const Location(),
                                       type: PageTransitionType.rightToLeft));
+                              setState(() {
+                                isLoadingCredential = false;
+                              });
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('Login Failed'),
                                 ),
                               );
+                              setState(() {
+                                isLoadingGoogle = false;
+                              });
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -328,6 +362,9 @@ class _LoginPageState extends State<LoginPage> {
                                 content: Text('No Internet Connection'),
                               ),
                             );
+                            setState(() {
+                              isLoadingGoogle = false;
+                            });
                           }
                         }, kBlueColor),
                       ],

@@ -19,6 +19,11 @@ class FoodlyProvider extends ChangeNotifier {
 
   double get long => _long;
 
+  void setLocation(String location) {
+    locationName = location;
+    notifyListeners();
+  }
+
   Future<void> determinePosition() async {
     try {
       bool serviceEnabled;

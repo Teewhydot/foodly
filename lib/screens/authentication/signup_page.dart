@@ -31,6 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController fullNameController = TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
   bool showSpinner = false;
+  bool isLoading = false;
 
   void startSpinning() {
     setState(() {
@@ -275,8 +276,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ],
                     ),
-                    ReusableButton(const Text('SIGN UP'), () async {
+                    ReusableButton(
+                        isLoading ? const Text('SIGN IN') : loadingIndicator,
+                        () async {
                       if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          isLoading = true;
+                        });
                         startSpinning();
                         final newUser = await credentialsSignInProvider.signUp(
                             emailController.text, passwordController.text);
@@ -286,12 +292,15 @@ class _SignUpPageState extends State<SignUpPage> {
                               PageTransition(
                                   child: const Location(),
                                   type: PageTransitionType.rightToLeft));
+                          setState(() {
+                            isLoading = false;
+                          });
                           stopSpinning();
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Sign Up Failed')));
-                          stopSpinning();
-                        }
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Sign Up Failed')));
+                              stopSpinning();
+                            }
                       }
                     }, kGreenColor),
                     addVerticalSpacing(20),
@@ -309,7 +318,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                 color: Colors.white,
                               ),
                               addHorizontalSpacing(30),
-                              const Center(child: Text('CONNECT WITH FACEBOOK'))
+                              Center(
+                                child: isLoading
+                                    ? const Text('CONNECT WITH FACEBOOK')
+                                    : loadingIndicator,
+                              )
                             ]), () async {
                           _accessToken =
                               await faceBookLoginProvider.facebookLogin();
@@ -336,7 +349,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                 color: Colors.white,
                               ),
                               addHorizontalSpacing(30),
-                              const Center(child: Text('CONNECT WITH GOOGLE'))
+                              Center(
+                                child: isLoading
+                                    ? loadingIndicator
+                                    : const Text('CONNECT WITH GOOGLE'),
+                              )
                             ]), () async {
                           await googleSignInProvider.login();
                           Navigator.push(

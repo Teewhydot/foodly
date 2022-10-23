@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 final scaffoldSpacing = addVerticalSpacing(40);
 
@@ -14,7 +15,6 @@ Widget addHorizontalSpacing(double width) {
     width: width.w,
   );
 }
-
 
 const bodyStyle = TextStyle(fontSize: 19.0);
 
@@ -48,3 +48,25 @@ const kGreenText = TextStyle(
   color: kGreenColor,
   fontSize: 20,
 );
+const whiteText = TextStyle(
+  color: kWhiteColor,
+  fontSize: 20,
+);
+
+const loadingIndicator = LoadingIndicator(
+    indicatorType: Indicator.ballPulse,
+
+    /// Required, The loading type of the widget
+    colors: [Colors.green],
+
+    /// Optional, The color collections
+    strokeWidth: 2,
+
+    /// Optional, The stroke of the line, only applicable to widget which contains line
+    backgroundColor: Colors.transparent,
+
+    /// Optional, Background of the widget
+    pathBackgroundColor: Colors.transparent
+
+    /// Optional, the stroke backgroundColor
+    );
