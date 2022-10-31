@@ -31,7 +31,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController fullNameController = TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
   bool showSpinner = false;
-  bool isLoading = false;
 
   void startSpinning() {
     setState(() {
@@ -50,10 +49,16 @@ class _SignUpPageState extends State<SignUpPage> {
     AccessToken? _accessToken;
     final faceBookLoginProvider =
         Provider.of<FacebookSignInProvider>(context, listen: false);
+    final faceBookLoginProviderListen = Provider.of<FacebookSignInProvider>(
+      context,
+    );
     final credentialsSignInProvider =
         Provider.of<CredentialsSignInProvider>(context, listen: false);
+
     final googleSignInProvider =
         Provider.of<GoogleSignInProvider>(context, listen: false);
+    final googleSignInProviderListen =
+        Provider.of<GoogleSignInProvider>(context);
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
       progressIndicator: const CircularProgressIndicator(
@@ -277,12 +282,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                     ReusableButton(
-                        isLoading ? const Text('SIGN IN') : loadingIndicator,
+                        showSpinner ? loadingIndicator : const Text('SIGN IN'),
                         () async {
                       if (_formKey.currentState!.validate()) {
-                        setState(() {
-                          isLoading = true;
-                        });
                         startSpinning();
                         final newUser = await credentialsSignInProvider.signUp(
                             emailController.text, passwordController.text);
@@ -292,15 +294,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               PageTransition(
                                   child: const Location(),
                                   type: PageTransitionType.rightToLeft));
-                          setState(() {
-                            isLoading = false;
-                          });
                           stopSpinning();
                         } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Sign Up Failed')));
-                              stopSpinning();
-                            }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Sign Up Failed')));
+                          stopSpinning();
+                        }
                       }
                     }, kGreenColor),
                     addVerticalSpacing(20),
@@ -319,11 +318,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               addHorizontalSpacing(30),
                               Center(
-                                child: isLoading
-                                    ? const Text('CONNECT WITH FACEBOOK')
-                                    : loadingIndicator,
+                                child: faceBookLoginProviderListen.fbSpinning
+                                    ? loadingIndicator
+                                    : const Text('CONNECT WITH FACEBOOK'),
                               )
                             ]), () async {
+                          faceBookLoginProvider.startSPinning();
                           _accessToken =
                               await faceBookLoginProvider.facebookLogin();
                           await faceBookLoginProvider.getUserFacebookData();
@@ -333,12 +333,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                 PageTransition(
                                     child: const Location(),
                                     type: PageTransitionType.rightToLeft));
+                            faceBookLoginProvider.stopSpinning();
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Login Failed'),
+                                content: Text('Facebook Login Failed'),
                               ),
                             );
+                            faceBookLoginProvider.stopSpinning();
                           }
                         }, kDeepBlueColor),
                         addVerticalSpacing(20),
@@ -350,18 +352,31 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               addHorizontalSpacing(30),
                               Center(
-                                child: isLoading
+                                child: googleSignInProviderListen.ggSpinning
                                     ? loadingIndicator
                                     : const Text('CONNECT WITH GOOGLE'),
                               )
                             ]), () async {
-                          await googleSignInProvider.login();
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: const Location(),
-                                  type: PageTransitionType.rightToLeft));
+                          googleSignInProvider.startSpinning();
+                          final user = await googleSignInProvider.login();
+                          if (user != null) {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: const Location(),
+                                    type: PageTransitionType.rightToLeft));
+                            googleSignInProvider.stopSpinning();
+                          } else {
+                            googleSignInProvider.stopSpinning();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Google Login Failed'),
+                              ),
+                            );
+                          }
+                          googleSignInProvider.stopSpinning();
                         }, kBlueColor),
+                        addVerticalSpacing(50),
                       ],
                     )
                   ],

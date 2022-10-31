@@ -52,12 +52,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    AccessToken? _accessToken;
+    AccessToken? accessToken;
+    final faceBookLoginProviderListen = Provider.of<FacebookSignInProvider>(
+      context,
+    );
     bool hasInternet;
     final credentialsSignInProvider =
         Provider.of<CredentialsSignInProvider>(context, listen: false);
     final googleSignInProvider =
         Provider.of<GoogleSignInProvider>(context, listen: false);
+    final googleSignInProviderListen =
+        Provider.of<GoogleSignInProvider>(context);
     final faceBookLoginProvider =
         Provider.of<FacebookSignInProvider>(context, listen: false);
     return ModalProgressHUD(
@@ -259,6 +264,10 @@ class _LoginPageState extends State<LoginPage> {
                                 content: Text('Invalid Credentials'),
                               ),
                             );
+                            stopSpinning();
+                            setState(() {
+                              isLoadingCredential = false;
+                            });
                           }
                         }
                       } else {
@@ -285,35 +294,28 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               addHorizontalSpacing(30),
                               Center(
-                                  child: isLoadingFacebook
+                                  child: faceBookLoginProviderListen.fbSpinning
                                       ? loadingIndicator
                                       : const Text('SIGN IN WITH FACEBOOK')),
                             ]), () async {
-                          setState(() {
-                            isLoadingFacebook = true;
-                          });
-                          _accessToken =
+                          faceBookLoginProvider.startSPinning();
+                          accessToken =
                               await faceBookLoginProvider.facebookLogin();
                           await faceBookLoginProvider.getUserFacebookData();
-                          if (_accessToken != null) {
+                          if (accessToken != null) {
                             Navigator.push(
                                 context,
                                 PageTransition(
                                     child: const Location(),
                                     type: PageTransitionType.rightToLeft));
-
-                            setState(() {
-                              isLoadingFacebook = false;
-                            });
+                            faceBookLoginProvider.stopSpinning();
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Login Failed'),
                               ),
                             );
-                            setState(() {
-                              isLoadingFacebook = false;
-                            });
+                            faceBookLoginProvider.stopSpinning();
                           }
                         }, kDeepBlueColor),
                         addVerticalSpacing(20),
@@ -325,7 +327,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               addHorizontalSpacing(30),
                               Center(
-                                  child: isLoadingGoogle
+                                  child: googleSignInProviderListen.ggSpinning
                                       ? loadingIndicator
                                       : const Text('SIGN IN WITH GOOGLE')),
                             ]), () async {
@@ -333,28 +335,22 @@ class _LoginPageState extends State<LoginPage> {
                               await InternetConnectionChecker().hasConnection;
 
                           if (hasInternet) {
-                            setState(() {
-                              isLoadingGoogle = true;
-                            });
-                            await googleSignInProvider.login();
-                            if (googleSignInProvider.currentUser != null) {
+                            googleSignInProvider.startSpinning();
+                            final user = await googleSignInProvider.login();
+                            if (user != null) {
                               Navigator.push(
                                   context,
                                   PageTransition(
                                       child: const Location(),
                                       type: PageTransitionType.rightToLeft));
-                              setState(() {
-                                isLoadingCredential = false;
-                              });
+                              googleSignInProvider.stopSpinning();
                             } else {
+                              googleSignInProvider.stopSpinning();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('Login Failed'),
+                                  content: Text('Google Login Failed'),
                                 ),
                               );
-                              setState(() {
-                                isLoadingGoogle = false;
-                              });
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(

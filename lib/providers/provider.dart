@@ -96,20 +96,37 @@ class CredentialsSignInProvider extends ChangeNotifier {
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? user;
+  bool isGoogleSpinning = false;
+
+  bool get ggSpinning => isGoogleSpinning;
 
   GoogleSignInAccount get currentUser => user!;
 
-  Future login() async {
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) return;
-    user = googleUser;
-    final googleAuth = await googleUser.authentication;
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    await FirebaseAuth.instance.signInWithCredential(credential);
+  void startSpinning() {
+    isGoogleSpinning = true;
     notifyListeners();
+  }
+
+  void stopSpinning() {
+    isGoogleSpinning = false;
+    notifyListeners();
+  }
+
+  Future<GoogleSignInAccount?> login() async {
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) {
+    } else {
+      user = googleUser;
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    }
+    notifyListeners();
+    return user;
   }
 
   Future logOut() async {
@@ -120,21 +137,35 @@ class GoogleSignInProvider extends ChangeNotifier {
 class FacebookSignInProvider extends ChangeNotifier {
   String email = '';
   String name = '';
+  bool isFbSpinning = false;
+
+  bool get fbSpinning => isFbSpinning;
 
   String get getEmail => email;
 
   String get getName => name;
 
-  Future<AccessToken> facebookLogin() async {
+  void startSPinning() {
+    isFbSpinning = true;
+    notifyListeners();
+  }
+
+  void stopSpinning() {
+    isFbSpinning = false;
+    notifyListeners();
+  }
+
+  Future<AccessToken?> facebookLogin() async {
     final LoginResult result = await FacebookAuth.instance.login();
 
     if (result.status == LoginStatus.success) {
       final AccessToken accessToken = result.accessToken!;
-
+      stopSpinning();
       return accessToken;
     } else {
-      throw Exception('Facebook login failed');
+      stopSpinning();
     }
+    return null;
   }
 
   Future<void> getUserFacebookData() async {
