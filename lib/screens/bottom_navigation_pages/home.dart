@@ -111,21 +111,24 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         actions: [
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        child: const Filter(),
-                        type: PageTransitionType.topToBottom));
-              },
-              child: const Center(
-                  child: SizedBox(
-                      height: 20,
-                      child: Text(
-                        'Filter',
-                        style: kBlackText,
-                      ))))
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const Filter(),
+                          type: PageTransitionType.topToBottom));
+                },
+                child: const Center(
+                    child: SizedBox(
+                        height: 20,
+                        child: Text(
+                          'Filter',
+                          style: kBlackText,
+                        )))),
+          )
         ],
       ),
       body: HomeBody(

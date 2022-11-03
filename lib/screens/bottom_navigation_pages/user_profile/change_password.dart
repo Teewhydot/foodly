@@ -30,87 +30,90 @@ class ChangePasswordPage extends StatelessWidget {
           },
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              addVerticalSpacing(20),
-              Text(
-                'Enter your current password and new password to change your password',
-                style: kDescTextStyle,
-              ),
-              addVerticalSpacing(20),
-              const Text(
-                'Current password',
-              ),
-              addVerticalSpacing(20),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Enter your current password',
-                  hintStyle: kDescTextStyle,
-                  border: InputBorder.none,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                addVerticalSpacing(20),
+                Text(
+                  'Enter your current password and new password to change your password',
+                  style: kDescTextStyle,
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                child: Divider(),
-              ),
-              addVerticalSpacing(20),
-              const Text(
-                'New password',
-              ),
-              addVerticalSpacing(20),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Enter your new password',
-                  hintStyle: kDescTextStyle,
-                  border: InputBorder.none,
+                addVerticalSpacing(20),
+                const Text(
+                  'Current password',
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                child: Divider(),
-              ),
-              addVerticalSpacing(20),
-              const Text(
-                'Confirm new password',
-              ),
-              addVerticalSpacing(20),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Confirm your new password',
-                  hintStyle: kDescTextStyle,
-                  border: InputBorder.none,
+                addVerticalSpacing(20),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter your current password',
+                    hintStyle: kDescTextStyle,
+                    border: InputBorder.none,
+                  ),
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                child: Divider(),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              ReusableButton(const Text('Change Password'), () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        child: SuccessActionWidget(
-                          heading: 'Password Changed Successfully',
-                          subHeading: '',
-                          buttonText: 'OK',
-                          onpressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        type: PageTransitionType.bottomToTop));
-              }, kGreenColor),
-              addVerticalSpacing(20),
-            ],
-          ),
-        ],
+                const Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Divider(),
+                ),
+                addVerticalSpacing(20),
+                const Text(
+                  'New password',
+                ),
+                addVerticalSpacing(20),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter your new password',
+                    hintStyle: kDescTextStyle,
+                    border: InputBorder.none,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Divider(),
+                ),
+                addVerticalSpacing(20),
+                const Text(
+                  'Confirm new password',
+                ),
+                addVerticalSpacing(20),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Confirm your new password',
+                    hintStyle: kDescTextStyle,
+                    border: InputBorder.none,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Divider(),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                ReusableButton(const Text('Change Password'), () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: SuccessActionWidget(
+                            heading: 'Password Changed Successfully',
+                            subHeading: '',
+                            buttonText: 'OK',
+                            onpressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          type: PageTransitionType.bottomToTop));
+                }, kGreenColor),
+                addVerticalSpacing(20),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

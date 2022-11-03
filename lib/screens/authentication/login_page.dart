@@ -32,12 +32,6 @@ class _LoginPageState extends State<LoginPage> {
   // if the user signs in with credentials
   bool isLoadingCredential = false;
 
-  // if the user signs in with facebook
-  bool isLoadingFacebook = false;
-
-  // if the user signs in with google
-  bool isLoadingGoogle = false;
-
   void startSpinning() {
     setState(() {
       isLoadingCredential = true;
@@ -298,24 +292,35 @@ class _LoginPageState extends State<LoginPage> {
                                       ? loadingIndicator
                                       : const Text('SIGN IN WITH FACEBOOK')),
                             ]), () async {
-                          faceBookLoginProvider.startSPinning();
-                          accessToken =
-                              await faceBookLoginProvider.facebookLogin();
-                          await faceBookLoginProvider.getUserFacebookData();
-                          if (accessToken != null) {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    child: const Location(),
-                                    type: PageTransitionType.rightToLeft));
-                            faceBookLoginProvider.stopSpinning();
+                          final hasInternet =
+                              await InternetConnectionChecker().hasConnection;
+
+                          if (hasInternet) {
+                            faceBookLoginProvider.startSPinning();
+                            accessToken =
+                                await faceBookLoginProvider.facebookLogin();
+                            await faceBookLoginProvider.getUserFacebookData();
+                            if (accessToken != null) {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: const Location(),
+                                      type: PageTransitionType.rightToLeft));
+                              faceBookLoginProvider.stopSpinning();
+                            } else {
+                              faceBookLoginProvider.stopSpinning();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Facebook Login Failed'),
+                                ),
+                              );
+                            }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Login Failed'),
+                                content: Text('No Internet Connection'),
                               ),
                             );
-                            faceBookLoginProvider.stopSpinning();
                           }
                         }, kDeepBlueColor),
                         addVerticalSpacing(20),
@@ -358,9 +363,7 @@ class _LoginPageState extends State<LoginPage> {
                                 content: Text('No Internet Connection'),
                               ),
                             );
-                            setState(() {
-                              isLoadingGoogle = false;
-                            });
+                            googleSignInProvider.stopSpinning();
                           }
                         }, kBlueColor),
                       ],

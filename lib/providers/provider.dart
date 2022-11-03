@@ -97,7 +97,6 @@ class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? user;
   bool isGoogleSpinning = false;
-
   bool get ggSpinning => isGoogleSpinning;
 
   GoogleSignInAccount get currentUser => user!;
@@ -138,9 +137,7 @@ class FacebookSignInProvider extends ChangeNotifier {
   String email = '';
   String name = '';
   bool isFbSpinning = false;
-
   bool get fbSpinning => isFbSpinning;
-
   String get getEmail => email;
 
   String get getName => name;
@@ -156,26 +153,35 @@ class FacebookSignInProvider extends ChangeNotifier {
   }
 
   Future<AccessToken?> facebookLogin() async {
-    final LoginResult result = await FacebookAuth.instance.login();
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
 
-    if (result.status == LoginStatus.success) {
-      final AccessToken accessToken = result.accessToken!;
-      stopSpinning();
-      return accessToken;
-    } else {
-      stopSpinning();
+      if (result.status == LoginStatus.success) {
+        final AccessToken accessToken = result.accessToken!;
+        stopSpinning();
+        return accessToken;
+      } else {
+        stopSpinning();
+      }
+      return null;
+    } on Exception catch (e) {
+      return null;
     }
-    return null;
   }
 
   Future<void> getUserFacebookData() async {
-    final userData = await FacebookAuth.i.getUserData();
-    email = userData['email'];
-    name = userData['name'];
-    notifyListeners();
+    try {
+      final userData = await FacebookAuth.i.getUserData();
+      email = userData['email'];
+      name = userData['name'];
+      notifyListeners();
+    } on Exception catch (e) {
+      return;
+    }
   }
 
   Future logOut() async {
     await FacebookAuth.instance.logOut();
+    notifyListeners();
   }
 }
