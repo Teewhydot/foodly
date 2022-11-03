@@ -1,10 +1,8 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:foodly/models/notification_widgets.dart';
 import 'package:foodly/reusables/constants.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
-import 'package:foodly/screens/mainscreen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Filter extends StatefulWidget {
@@ -73,84 +71,45 @@ class _FilterState extends State<Filter> {
                 Column(
                   children: [
                     addVerticalSpacing(20),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('All'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: const [
+                        ReusableFilterChip(
+                          text: Text('All'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Brunch'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('Brunch'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Dinner'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('Dinner'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Burger'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('Burger'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Chinese'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('Chinese'),
+                        ),
+                        ReusableFilterChip(
+                          text: Text('Pizza'),
+                        ),
+                        ReusableFilterChip(
+                          text: Text('Salad'),
+                        ),
+                        ReusableFilterChip(
+                          text: Text('Breakfast'),
+                        ),
+                        ReusableFilterChip(
+                          text: Text('Soup'),
+                        ),
+                        ReusableFilterChip(
+                          text: Text('Dinner'),
                         ),
                       ],
                     ),
                     addVerticalSpacing(10),
                     Row(
-                      children: [
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Pizza'),
-                            onSelected: (bool isChecked) {},
-                          ),
-                        ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Salad'),
-                            onSelected: (bool isChecked) {},
-                          ),
-                        ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Breakfast'),
-                            onSelected: (bool isChecked) {},
-                          ),
-                        ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Soup'),
-                            onSelected: (bool isChecked) {},
-                          ),
-                        ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Dinner'),
-                            onSelected: (bool isChecked) {},
-                          ),
-                        ),
-                      ],
+                      children: const [],
                     ),
                   ],
                 ),
@@ -182,35 +141,20 @@ class _FilterState extends State<Filter> {
                 Column(
                   children: [
                     addVerticalSpacing(20),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Any'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                    Wrap(
+                      spacing: 10,
+                      children: const [
+                        ReusableFilterChip(
+                          text: Text('Any'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Vegetarian'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('Vegetarian'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Vegan'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('Vegan'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('Glutton free'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('Glutton free'),
                         ),
                       ],
                     ),
@@ -244,35 +188,20 @@ class _FilterState extends State<Filter> {
                 Column(
                   children: [
                     addVerticalSpacing(20),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('\$'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                    Wrap(
+                      spacing: 10,
+                      children: const [
+                        ReusableFilterChip(
+                          text: Text('\$'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('\$\$'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('\$\$'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('\$\$\$'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('\$\$\$'),
                         ),
-                        Expanded(
-                          child: ReusableFilterChip(
-                            isAllSelected: isAllSelected,
-                            text: const Text('\$\$\$\$\$\$'),
-                            onSelected: (bool isChecked) {},
-                          ),
+                        ReusableFilterChip(
+                          text: Text('\$\$\$\$\$\$'),
                         ),
                       ],
                     ),
@@ -281,22 +210,22 @@ class _FilterState extends State<Filter> {
               ],
             ),
             ReusableButton(const Text('APPLY FILTERS'), () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      child: SuccessActionWidget(
-                        heading: 'Your order has been placed successfuly',
-                        subHeading: '',
-                        buttonText: 'KEEP EXPLORING',
-                        onpressed: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: const MainScreen(),
-                                  type: PageTransitionType.topToBottom));
-                        },
-                      ),
-                      type: PageTransitionType.bottomToTop));
+              // Navigator.push(
+              //     context,
+              //     PageTransition(
+              //         child: SuccessActionWidget(
+              //           heading: 'Your order has been placed successfuly',
+              //           subHeading: '',
+              //           buttonText: 'KEEP EXPLORING',
+              //           onpressed: () {
+              //             Navigator.push(
+              //                 context,
+              //                 PageTransition(
+              //                     child: const MainScreen(),
+              //                     type: PageTransitionType.topToBottom));
+              //           },
+              //         ),
+              //         type: PageTransitionType.bottomToTop));
             }, kGreenColor),
           ],
         ),
@@ -305,26 +234,39 @@ class _FilterState extends State<Filter> {
   }
 }
 
-class ReusableFilterChip extends StatelessWidget {
+class ReusableFilterChip extends StatefulWidget {
   const ReusableFilterChip({
     Key? key,
-    required this.isAllSelected,
     required this.text,
-    required this.onSelected,
   }) : super(key: key);
-
-  final bool isAllSelected;
   final Text text;
-  final onSelected;
+
+  @override
+  State<ReusableFilterChip> createState() => _ReusableFilterChipState();
+}
+
+class _ReusableFilterChipState extends State<ReusableFilterChip> {
+  var isSelected = false;
 
   @override
   Widget build(BuildContext context) {
+    List<Text> filters = [];
     return FilterChip(
         selectedColor: kGreenColor,
         pressElevation: 2,
-        selected: isAllSelected,
-        label: text,
-        onSelected: onSelected);
+        selected: isSelected,
+        label: widget.text,
+        onSelected: (val) {
+          setState(() {
+            isSelected = val;
+            if (val) {
+              filters.add(widget.text);
+            } else {
+              filters.removeWhere((element) => element == widget.text);
+            }
+          });
+          print(filters);
+        });
   }
 }
 
