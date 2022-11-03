@@ -1,3 +1,5 @@
+// ignore_for_file: unused_catch_clause
+
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -97,6 +99,7 @@ class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? user;
   bool isGoogleSpinning = false;
+
   bool get ggSpinning => isGoogleSpinning;
 
   GoogleSignInAccount get currentUser => user!;
@@ -113,8 +116,7 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   Future<GoogleSignInAccount?> login() async {
     final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) {
-    } else {
+    if (googleUser == null) {} else {
       user = googleUser;
       final googleAuth = await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
@@ -137,7 +139,9 @@ class FacebookSignInProvider extends ChangeNotifier {
   String email = '';
   String name = '';
   bool isFbSpinning = false;
+
   bool get fbSpinning => isFbSpinning;
+
   String get getEmail => email;
 
   String get getName => name;

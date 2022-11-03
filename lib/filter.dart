@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:foodly/models/chip_model.dart';
 import 'package:foodly/reusables/constants.dart';
+import 'package:foodly/reusables/widgets/filter_chip.dart';
 import 'package:foodly/reusables/widgets/reusable_button.dart';
-import 'package:page_transition/page_transition.dart';
 
 class Filter extends StatefulWidget {
   const Filter({Key? key}) : super(key: key);
@@ -13,9 +14,38 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
+  int categoriesIndex = 0;
+  int dietaryIndex = 1;
+  int priceIndex = 2;
+  List<List<CustomChip>> chipsList = [
+    [
+      CustomChip(chipText: "All", isSelected: false),
+      CustomChip(chipText: "Branch", isSelected: false),
+      CustomChip(chipText: "Dinner", isSelected: false),
+      CustomChip(chipText: "Burger", isSelected: false),
+      CustomChip(chipText: "Chinese", isSelected: false),
+      CustomChip(chipText: "Pizza", isSelected: false),
+      CustomChip(chipText: "Salad", isSelected: false),
+      CustomChip(chipText: "Breakfast", isSelected: false),
+      CustomChip(chipText: "Soup", isSelected: false),
+    ],
+    [
+      CustomChip(chipText: "Vegan", isSelected: false),
+      CustomChip(chipText: "Vegetarian", isSelected: false),
+      CustomChip(chipText: "Gluten Free", isSelected: false),
+      CustomChip(chipText: "Halal", isSelected: false),
+      CustomChip(chipText: "Any", isSelected: false),
+    ],
+    [
+      CustomChip(chipText: "\$ \$", isSelected: false),
+      CustomChip(chipText: "\$ \$ \$", isSelected: false),
+      CustomChip(chipText: "\$ \$ \$ \$", isSelected: false),
+      CustomChip(chipText: "\$ \$ \$ \$ \$", isSelected: false),
+    ],
+  ];
+
   @override
   Widget build(BuildContext context) {
-    bool isAllSelected = false;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -53,11 +83,13 @@ class _FilterState extends State<Filter> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: const Filter(),
-                                  type: PageTransitionType.topToBottom));
+                          // iterate through the list and deselect all the items
+                          for (int i = 0; i < chipsList[0].length; i++) {}
+                          // Navigator.push(
+                          //     context,
+                          //     PageTransition(
+                          //         child: const Filter(),
+                          //         type: PageTransitionType.topToBottom));
                         },
                         child: const Center(
                             child: SizedBox(
@@ -74,38 +106,12 @@ class _FilterState extends State<Filter> {
                     Wrap(
                       spacing: 10,
                       runSpacing: 10,
-                      children: const [
-                        ReusableFilterChip(
-                          text: Text('All'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Brunch'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Dinner'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Burger'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Chinese'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Pizza'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Salad'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Breakfast'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Soup'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Dinner'),
-                        ),
-                      ],
+                      children: chipsList[categoriesIndex]
+                          .map((e) => ReusableFilterChip(
+                                text: Text(e.chipText),
+                                isSelected: e.isSelected,
+                              ))
+                          .toList(),
                     ),
                     addVerticalSpacing(10),
                     Row(
@@ -123,11 +129,11 @@ class _FilterState extends State<Filter> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: const Filter(),
-                                  type: PageTransitionType.topToBottom));
+                          // Navigator.push(
+                          //     context,
+                          //     PageTransition(
+                          //         child: const Filter(),
+                          //         type: PageTransitionType.topToBottom));
                         },
                         child: const Center(
                             child: SizedBox(
@@ -143,20 +149,13 @@ class _FilterState extends State<Filter> {
                     addVerticalSpacing(20),
                     Wrap(
                       spacing: 10,
-                      children: const [
-                        ReusableFilterChip(
-                          text: Text('Any'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Vegetarian'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Vegan'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('Glutton free'),
-                        ),
-                      ],
+                      runSpacing: 10,
+                      children: chipsList[dietaryIndex]
+                          .map((e) => ReusableFilterChip(
+                                text: Text(e.chipText),
+                                isSelected: e.isSelected,
+                              ))
+                          .toList(),
                     ),
                   ],
                 ),
@@ -170,11 +169,11 @@ class _FilterState extends State<Filter> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: const Filter(),
-                                  type: PageTransitionType.topToBottom));
+                          // Navigator.push(
+                          //     context,
+                          //     PageTransition(
+                          //         child: const Filter(),
+                          //         type: PageTransitionType.topToBottom));
                         },
                         child: const Center(
                             child: SizedBox(
@@ -190,42 +189,19 @@ class _FilterState extends State<Filter> {
                     addVerticalSpacing(20),
                     Wrap(
                       spacing: 10,
-                      children: const [
-                        ReusableFilterChip(
-                          text: Text('\$'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('\$\$'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('\$\$\$'),
-                        ),
-                        ReusableFilterChip(
-                          text: Text('\$\$\$\$\$\$'),
-                        ),
-                      ],
+                      children: chipsList[priceIndex]
+                          .map((e) => ReusableFilterChip(
+                                text: Text(e.chipText),
+                                isSelected: e.isSelected,
+                              ))
+                          .toList(),
                     ),
                   ],
                 ),
               ],
             ),
             ReusableButton(const Text('APPLY FILTERS'), () {
-              // Navigator.push(
-              //     context,
-              //     PageTransition(
-              //         child: SuccessActionWidget(
-              //           heading: 'Your order has been placed successfuly',
-              //           subHeading: '',
-              //           buttonText: 'KEEP EXPLORING',
-              //           onpressed: () {
-              //             Navigator.push(
-              //                 context,
-              //                 PageTransition(
-              //                     child: const MainScreen(),
-              //                     type: PageTransitionType.topToBottom));
-              //           },
-              //         ),
-              //         type: PageTransitionType.bottomToTop));
+              Navigator.pop(context);
             }, kGreenColor),
           ],
         ),
@@ -233,131 +209,3 @@ class _FilterState extends State<Filter> {
     );
   }
 }
-
-class ReusableFilterChip extends StatefulWidget {
-  const ReusableFilterChip({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-  final Text text;
-
-  @override
-  State<ReusableFilterChip> createState() => _ReusableFilterChipState();
-}
-
-class _ReusableFilterChipState extends State<ReusableFilterChip> {
-  var isSelected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    List<Text> filters = [];
-    return FilterChip(
-        selectedColor: kGreenColor,
-        pressElevation: 2,
-        selected: isSelected,
-        label: widget.text,
-        onSelected: (val) {
-          setState(() {
-            isSelected = val;
-            if (val) {
-              filters.add(widget.text);
-            } else {
-              filters.removeWhere((element) => element == widget.text);
-            }
-          });
-          print(filters);
-        });
-  }
-}
-
-//
-//
-//
-//
-// Expanded(
-// child: Container(
-// color: kWhiteColor,
-// width: width,
-// child: Column(
-// children: [
-// addVerticalSpacing(10),
-// Container(
-// height: 40.h,
-// color: kWhiteColor,
-// padding: const EdgeInsets.all(5),
-// width: 375.h,
-// child: Row(
-// mainAxisAlignment: MainAxisAlignment.spaceAround,
-// children: [
-// GestureDetector(
-// onTap: () {
-// setState(() {
-// activeFilter = 0;
-// });
-// },
-// child: SizedBox(
-// height: 54.h,
-// width: 60.w,
-// child: const Text('Type'))),
-// GestureDetector(
-// onTap: () {
-// setState(() {
-// activeFilter = 0;
-// });
-// },
-// child: SizedBox(
-// height: 54.h,
-// width: 60.w,
-// child: const Text('Sort by'))),
-// GestureDetector(
-// onTap: () {
-// setState(() {
-// activeFilter = 0;
-// });
-// },
-// child: SizedBox(
-// height: 54.h,
-// width: 60.w,
-// child: const Text('Price'))),
-// GestureDetector(
-// onTap: () {
-// setState(() {
-// activeFilter = 0;
-// });
-// },
-// child: SizedBox(
-// height: 54.h,
-// width: 60.w,
-// child: const Text('Diet type'))),
-// ],
-// ),
-// ),
-// const Divider(),
-// SizedBox(
-// height: 150,
-// child: ListView.builder(
-// key: const PageStorageKey('featured-partners'),
-// itemCount: filterTypeList.length,
-// itemBuilder: (context, index) {
-// return FilterTypeWidget(
-// image: filterTypeList[index].image,
-// name: filterTypeList[index].text,
-// count: filterTypeList[index].count,
-// );
-// },
-// scrollDirection: Axis.horizontal,
-// physics: const ClampingScrollPhysics(),
-// // children: featuredPartners,
-// ),
-// ),
-// addVerticalSpacing(50),
-// LocationButton(const Text('COMPLETE',style: kBlackText,), (){}, kWhiteColor),
-// ],
-// )),
-// ),
-// Expanded(
-// child: Container(
-// color: Colors.transparent.withOpacity(0.5),
-// width: width,
-// ),
-// )
