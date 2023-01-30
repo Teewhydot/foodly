@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/providers/provider.dart';
-import 'package:foodly/screens/mainscreen.dart';
+import 'package:foodly/screens/onboarding/onboarding.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const MainScreen(),
+        home: const Onboarding(),
       ),
     );
   }
